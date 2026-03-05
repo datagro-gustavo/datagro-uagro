@@ -1,0 +1,7 @@
+function BuscarUltimasNoticias () {
+    
+}
+
+function BuscarTitulosNoticiasDestaque() {
+    
+}
