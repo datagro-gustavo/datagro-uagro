@@ -66,7 +66,7 @@ export const NavBar = ({ props, paywall, fixed }) => {
 					<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
 						<button
 							type="button"
-							onClick={() => window.location.href = '/uagro-next'}
+							onClick={() => window.location.href = '/'}
 							aria-label="Ir para home"
 							className="cursor-pointer"
 						>
