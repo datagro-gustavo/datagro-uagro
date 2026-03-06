@@ -7,7 +7,7 @@ export const configureApi = (baseURL) => {
 }
 
 const api = create({
-    baseURL: "https://api.uagro.com.br/",
+    baseURL: process.env.NEXT_PUBLIC_NEWS_API,
 })
 
 
