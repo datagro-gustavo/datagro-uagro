@@ -271,7 +271,7 @@ export const SectionNews = ({ id, slug }) => {
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/^-+|-+$/g, "");
 
-        window.location.href = `/uagro-next/notices/${id}/${slug}`
+        window.location.href = `/notices/${id}/${slug}`
     };
 
     const textColorPrimary = theme ? "#74776f" : "text-white";

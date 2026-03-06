@@ -577,11 +577,21 @@ const CardNews = ({
 				) : (
 					<h3 className={`text-[17px] ${styles?.titleFontWeight} ${styles?.titleFontSize} leading-snug text-neutral-900`}>
 						<span
-							className="hover:underline decoration-2 underline-offset-2 cursor-pointer"
-							onClick={() => onClick(slug)}
+							className="hover:underline decoration-2 underline-offset-2 "
+							onClick={() => onClickGoToCategory(categoryName, categoryId)}
 						>
-							{!category ? <div className="mt-4"></div> : <></>}
+							{!category ? <div style={{ marginTop: categoryName ? '0.8rem' : '0rem' }} className="">
+								<span className={`${categoryName ? ' cursor-pointer' : ''}  text-[#98bf0e] inline-flex items-center px-0 py-1 text-xs font-semibold uppercase hover:underline `}>
 
+									{categoryName}
+								</span>
+
+
+							</div> : <></>}
+
+						</span>
+
+						<span className="cursor-pointer hover:underline">
 							{!title ? <div style={{ height: "1.1rem" }}> <Skeleton width={"80%"} height={"15px"} /></div> : <></>}
 
 							{!title ? <Skeleton width={"70%"} height={"15px"} /> : title}

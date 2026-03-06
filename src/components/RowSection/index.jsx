@@ -48,6 +48,7 @@ const RowSection = ({ scrolled, name, noticeProp, title, more, index }) => {
         const categoryId = notice?.matters?.[0]?.id;
         const categoryName = notice?.matters?.[0]?.title;
 
+
         return {
             ...card,
             ...(card?.priority === 'high' && { description: notice?.description }),
