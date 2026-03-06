@@ -22,13 +22,10 @@ export const Climate = () => {
                 <div className="flex justify-center">
                     <iframe
                         id="frameclima"
-<<<<<<< HEAD
+
  
                         src={`https://rotinas.datagro.com/Portal/assets/widgets/clima/pt_br/cli.php`}
-=======
 
-                        src={`https://rotinas.datagro.com/Portal/assets/widgets/clima/${langCode}/cli.php`}
->>>>>>> fe0945819cb91e36da238ac28378a75c9372a6c2
                         scrolling="no"
                         className="border-0 w-[360px] h-[140px] p-8 ml-6"
                         title="Tempo Agora"
