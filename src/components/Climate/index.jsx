@@ -23,7 +23,7 @@ export const Climate = () => {
                     <iframe
                         id="frameclima"
  
-                        src={`https://rotinas.datagro.com/Portal/assets/widgets/clima/${langCode}/cli.php`}
+                        src={`https://rotinas.datagro.com/Portal/assets/widgets/clima/pt_br/cli.php`}
                         scrolling="no"
                         className="border-0 w-[360px] h-[140px] p-8 ml-6"
                         title="Tempo Agora"

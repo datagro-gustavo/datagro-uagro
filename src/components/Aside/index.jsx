@@ -241,7 +241,7 @@ export const Aside = () => {
                 </CardWrapper> */}
 
 
-                <Image alt="banner datagro" width={300} height={300} className="w-[350px] mx-auto mt-5 mb-7" src={imagePrimary} />
+                <Image alt="banner datagro"  onClick={() => window.open("http://datagro.com/","blank")}  width={300} height={300} className="w-[350px] mx-auto mt-5 mb-7" src={imagePrimary} />
 
                 <div className="mx-auto">
                     <div className="mt-6 mb-6 w-full  ">

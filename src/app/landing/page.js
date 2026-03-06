@@ -64,7 +64,7 @@ export default function Landing() {
                     <div className="w-full" >
                         <MaisLidasSection />
                         <TechSectionTemp />
-                        <Image width={700} height={700} className="w-full " src={banner} alt="image" />
+                       
                     </div>
                     <Border className="hidden md:flex border border-r-0 ml-5 mr-5 border-slate-500 h-[auto]" />
                     <Aside />
