@@ -591,7 +591,7 @@ const CardNews = ({
 
 						</span>
 
-						<span className="cursor-pointer hover:underline">
+						<span 	onClick={() => onClick(slug)}  className="cursor-pointer hover:underline">
 							{!title ? <div style={{ height: "1.1rem" }}> <Skeleton width={"80%"} height={"15px"} /></div> : <></>}
 
 							{!title ? <Skeleton width={"70%"} height={"15px"} /> : title}

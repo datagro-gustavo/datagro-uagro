@@ -2,7 +2,7 @@ import { SectionNews } from "@/components/SectionNews";
 
 async function getNewsBySlug(slug) {
   const res = await fetch(
-    `${process.env.NEWS_API ?? process.env.NEXT_PUBLIC_NEWS_API}/api/News/list?slug=${encodeURIComponent(slug)}&lang=pt-br`,
+    `${process.env.NEWS_API ?? process.env.NEXT_PUBLIC_NEWS_API}/api/News/list?slug=${slug}&lang=pt-br`,
     { cache: "no-store" }
   );
 
