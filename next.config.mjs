@@ -18,7 +18,11 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "s3-uagro.s3.amazonaws.com",
-      }
+      },
+      {
+        protocol: "https",
+        hostname: "publicador.uagro.com.br",
+      },
     ],
   },
 };

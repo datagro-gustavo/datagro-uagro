@@ -5,7 +5,7 @@ export const SafeImage = ({ src, alt, className, isSectionNews = false }) => {
   const [currentSrc, setCurrentSrc] = useState(null);
   const [extensionIndex, setExtensionIndex] = useState(0);
   const [error, setError] = useState(false);
-
+  const [usedFallback, setUsedFallback] = useState(false);
   const extensions = ["jpg", "jpeg", "png"];
 
   const transformUrl = (url) => {
@@ -33,7 +33,7 @@ export const SafeImage = ({ src, alt, className, isSectionNews = false }) => {
     let pathname = u;
     try {
       pathname = new URL(u).pathname;
-    } catch {}
+    } catch { }
 
     const wp = pathname.indexOf("/wp-content/");
     if (wp !== -1) {
@@ -44,7 +44,7 @@ export const SafeImage = ({ src, alt, className, isSectionNews = false }) => {
     if (pathname.startsWith("/")) return `${S3}${pathname}`;
     return `${S3}/${pathname}`;
   };
-  
+
 
   useEffect(() => {
     if (!src) return;
@@ -67,26 +67,39 @@ export const SafeImage = ({ src, alt, className, isSectionNews = false }) => {
       setExtensionIndex(nextIndex);
       setCurrentSrc(`${baseWithoutExt}.${extensions[nextIndex]}`);
     } else {
-      setError(true);
+      // tentou todas extensões
+
+      if (!usedFallback) {
+        const replaced = baseWithoutExt.replace(
+          "https://s3-uagro.s3.amazonaws.com",
+          "https://publicador.uagro.com.br/wp-content"
+        );
+
+        setUsedFallback(true);
+        setExtensionIndex(0);
+        setCurrentSrc(`${replaced}.${extensions[0]}`);
+      } else {
+        setError(true);
+      }
     }
   };
 
   if (!currentSrc || error) {
     return (
-        <>
+      <>
         {!isSectionNews ? (
-            <div className="w-full h-full bg-neutral-200 flex items-center justify-center">
-              <div className="w-8 h-8 bg-neutral-300 rounded-sm" />
-            </div>
-          ) : (
-            <>
-              
-            </>
-          )
+          <div className="w-full h-full bg-neutral-200 flex items-center justify-center">
+            <div className="w-8 h-8 bg-neutral-300 rounded-sm" />
+          </div>
+        ) : (
+          <>
+
+          </>
+        )
         }
       </>
     );
-}
+  }
 
   return (
     <Image

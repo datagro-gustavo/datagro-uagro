@@ -1,5 +1,5 @@
 'use client'
-
+import { usePathname } from "next/navigation";
 import React, { useContext, useState, useEffect } from "react"
 
 /* COMPONENTS */
@@ -231,6 +231,7 @@ const AnimatedImage = styled.div`
 // };
 
 export const SectionNews = ({ id, slug }) => {
+    const pathname = usePathname();
 
     const location = window.location.pathname
 
@@ -241,6 +242,7 @@ export const SectionNews = ({ id, slug }) => {
     const [scrolledPaywall, setScrolledPaywall] = useState(false);
     const { user } = useContext(AuthContext)
 
+
     const CHUNK_SIZE = 8;
 
     // monta os chunks
@@ -250,7 +252,8 @@ export const SectionNews = ({ id, slug }) => {
         chunks.push(rowNotices.slice(i, i + CHUNK_SIZE));
     }
 
-    const url = `${window.location.origin}${window.location.pathname}`;
+
+    const url = `${window.location.origin}${window.location.pathname}${pathname}`;
 
     useEffect(() => {
         setPageType("news");
@@ -287,17 +290,20 @@ export const SectionNews = ({ id, slug }) => {
             }
             setPageType("news");
 
+
         })();
     }, [location.state?.url])
 
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
-    //    window.addEventListener("scroll", handleScrollPaywall);
+        //    window.addEventListener("scroll", handleScrollPaywall);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+
     const paywall = !user && notice?.importanceLevel === 3;
+
 
     const novaUrl = notice?.imageUrl?.replace(
         'https://datagro.imgix.net/wp-content/uploads',
@@ -305,17 +311,17 @@ export const SectionNews = ({ id, slug }) => {
     );
 
     const shareTwitter = () => {
-        const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
+        const shareUrl = `https://twitter.com/intent/tweet?url=https://uagro.com.br${pathname}`;
         window.open(shareUrl, "_blank");
     };
 
     const shareFacebook = () => {
-        const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=https://uagro.com.br${pathname}`;
         window.open(shareUrl, "_blank");
     };
 
     const shareWhatsApp = () => {
-        const shareUrl = `https://wa.me/?text=${encodeURIComponent(url)}`;
+        const shareUrl = `https://wa.me/?text=https://uagro.com.br${pathname}`;
         window.open(shareUrl, "_blank");
     };
 
@@ -325,7 +331,7 @@ export const SectionNews = ({ id, slug }) => {
     };
 
     const copyLink = () => {
-        navigator.clipboard.writeText(url)
+        navigator.clipboard.writeText(`https://uagro.com.br${pathname}`)
             .then(() => {
                 toast.success("Link copiado!", {
                     autoClose: 1500
@@ -426,16 +432,16 @@ export const SectionNews = ({ id, slug }) => {
                                         :
                                         <>
                                             {notice?.columnistId ?
-                                            (
-                                                <>
-                                                <SafeImage src={notice?.imageUrl} />
-                                                <p className="font-metropolis text-sm "><b>Por:</b> autor</p>
-                                            </>
-                                            )
-                                            :
-                                            (<> </>)
+                                                (
+                                                    <>
+                                                        <SafeImage src={notice?.imageUrl} />
+                                                        <p className="font-metropolis text-sm "><b>Por:</b> autor</p>
+                                                    </>
+                                                )
+                                                :
+                                                (<> </>)
                                             }
-                                            
+
                                         </>
 
                                     }
@@ -478,14 +484,14 @@ export const SectionNews = ({ id, slug }) => {
                                     </AnimatedImage>
                                     :
                                     <div className="mt-5 h-[auto] w-full mb-9">
-                                        <SafeImage className="w-full h-full" src={novaUrl} alt="foto" isSectionNews={true} />
+                                        <SafeImage className="w-full h-full" src={novaUrl} alt={notice?.slug} isSectionNews={true} />
                                     </div>
                                 }
                             </figure>
-                             
+
 
                             <Notice notice={notice.htmlContent} importanceLevel={notice?.importanceLevel} />
-                            <Tags notice={notice}/>
+                            <Tags notice={notice} />
                             {/* {!paywall && (
                                 <>
                                     {columnistName
@@ -504,11 +510,11 @@ export const SectionNews = ({ id, slug }) => {
                         <div className="hidden md:flex border border-r-0 ml-5 mr-5 border-slate-500 h-[auto]" />
                         <Aside />
                     </div>
-{/* 
+                    {/* 
                     {!paywall && (
                         <> */}
-                            <InfiniteScroll />
-                        {/* </>
+                    <InfiniteScroll />
+                    {/* </>
                     )} */}
 
                 </section>

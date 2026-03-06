@@ -31,8 +31,8 @@ export async function generateMetadata({ params }) {
 
 export default async function News({ params }) {
   const { slug } = await params;
-  console.log("Slug recebido:", slug); // Log para verificar o valor do slug
+
   const data = await getNewsBySlug(slug);
 
-  return <SectionNews id={data?.id} slug={slug} />;
+  return <SectionNews id={data?.id} slug={slug}  />;
 }
