@@ -118,6 +118,7 @@ export function NewsProvider({ children }) {
 
     fetchMarket();
   }, [culture]);
+  
 
 
   useEffect(() => {
@@ -236,8 +237,8 @@ export function NewsProvider({ children }) {
   const getByCategoryTemp = async (ignored = []) => {
     const minDate = getMinDate();
     const idsToIgnore = ignored.length ? ignored : renderingNotices;
-    console.log("idsToIgnore", ignored)
-    let url = `api/News/List?quantity=20&lang=${langCode}&minDate=${minDate}&ignoredIds=${idsToIgnore.join(",")}`;
+
+    let url = `api/News/List?quantity=70&lang=${langCode}&ignoredIds=${idsToIgnore.join(",")}`;
     const response = await api.get(url);
 
     if (response.status !== 200);

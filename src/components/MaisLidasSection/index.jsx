@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { getSessionConfig } from "../../utils/getSessionConfig";
 import CardNews from "../CardNews";
 import { NewsContext } from "../../context/news";
@@ -15,88 +15,96 @@ const MaisLidasSection = ({ name }) => {
   const listaNotices = Array.isArray(mostRead?.[0]) ? mostRead[0] : [];
   const cardNotices = Array.isArray(mostRead?.[1]) ? mostRead[1] : [];
 
-  const [mainNotice, ...restNotices] = cardNotices;
+  const [mainNotice, ...restFromCards] = cardNotices;
+
+  // pega lista SEM repetir o main
+  const fallbackList = listaNotices.filter(
+    (n) => n.id !== mainNotice?.id
+  );
+
+  // junta tudo (prioridade pro cardNotices)
+  const restNotices = [...restFromCards, ...fallbackList];
 
   const cards = Array.isArray(config.qtd_cards)
-    ? config.qtd_cards.map((card, index) => {
-      // 1) Coluna de ranking (Mais lidas em lista)
+    ? config.qtd_cards
+      .map((card, index) => {
 
-      if (index === 0) {
+        // 1) Lista lateral (ranking)
+        if (index === 0) {
+          const listItems = listaNotices.map((notice, i) => ({
+            id: notice.id ?? i,
+            href: notice.url,
+            title: notice.title,
+            slug: notice.slug,
+            noticeId: notice?.markets?.[0]?.id,
+            categoryId: notice?.matters?.[0]?.id,
 
-        const listItems = listaNotices.map((notice, i) => ({
-          id: notice.id ?? i,
-          href: notice.url,
-          title: notice.title,
-          slug: notice.slug,
-          noticeId: notice?.markets?.[0]?.id,
-          categoryId: notice?.matters?.[0]?.id,
-          category: notice?.matters?.[0]?.title,
-          number: i + 1,
-        }));
+            category: notice?.matters?.[0]?.title,
+            number: i + 1,
+          }));
 
-        return {
-          ...card,
-          listItems,
-        };
-      }
+          return {
+            ...card,
+            listItems,
+          };
+        }
 
-      // 2) Card de destaque principal
-      if (card.id === "ml-main-highlight" && mainNotice) {
-        return {
-          ...card,
-          title: mainNotice.title ?? card.title,
-          description: mainNotice.description ?? card.description,
-          href: mainNotice.url ?? card.href,
-          noticeId: mainNotice?.markets?.[0]?.id,
-          id: mainNotice?.id,
-          slug: mainNotice?.slug,
-          category: mainNotice?.matters?.[0]?.title ?? card.category,
-          categoryId: mainNotice?.matters?.[0]?.id ?? card.categoryId,
-          imageUrl: mainNotice.imageUrl ?? card.imageUrl,
-        };
-      }
+        // 2) Destaque principal
+        if (card.id === "ml-main-highlight" && mainNotice) {
+          return {
+            ...card,
+            title: mainNotice.title ?? card.title,
+            description: mainNotice.description ?? card.description,
+            href: mainNotice.url ?? card.href,
+            noticeId: mainNotice?.markets?.[0]?.id,
+            id: mainNotice?.id,
+            slug: mainNotice?.slug,
+            category: mainNotice?.matters?.[0]?.title ?? card.category,
+            categoryId: mainNotice?.matters?.[0]?.id ?? card.categoryId,
+            imageUrl: mainNotice.imageUrl ?? card.imageUrl,
+          };
+        }
 
-      // 3) Caoluna 2 com 3 itens
-      if (card.id === "ml-col2-stack") {
-        const items = restNotices.slice(0, 3).map((notice, i) => ({
-          id: notice.id ?? i,
-          href: notice.url,
-          slug: notice.slug,
-          noticeId: notice?.markets?.[0]?.id,
-          title: notice.title,
-          imageUrl: notice.imageUrl,
-          category: notice?.matters?.[0]?.title,
-          categoryId: notice?.matters?.[0]?.id,
+  // Coluna 2 (3 itens)
+if (card.id === "ml-col2-stack") {
+  const items = restNotices.slice(0, 3).map((notice, i) => ({
+    id: notice.id ?? i,
+    href: notice.url,
+    slug: notice.slug,
+    noticeId: notice?.markets?.[0]?.id,
+    title: notice.title,
+    imageUrl: notice.imageUrl,
+    category: notice?.matters?.[0]?.title,
+    categoryId: notice?.matters?.[0]?.id,
+  }));
 
-        }));
+  return {
+    ...card,
+    items,
+  };
+}
 
-        return {
-          ...card,
-          items,
-        };
-      }
+// Coluna 3 (3 itens)
+if (card.id === "ml-col3-stack") {
+  const items = restNotices.slice(3, 6).map((notice, i) => ({
+    id: notice.id ?? i,
+    href: notice.url,
+    slug: notice.slug,
+    noticeId: notice?.markets?.[0]?.id,
+    title: notice.title,
+    imageUrl: notice.imageUrl,
+    category: notice?.matters?.[0]?.title,
+    categoryId: notice?.matters?.[0]?.id,
+  }));
 
-      // 4) Coluna 3 com mais 3 itens
-      if (card.id === "ml-col3-stack") {
-        const items = restNotices.slice(3, 6).map((notice, i) => ({
-          id: notice.id ?? i,
-          href: notice.url,
-          noticeId: notice?.markets?.[0]?.id,
-          slug: notice.slug,
-          title: notice.title,
-          imageUrl: notice.imageUrl,
-          category: notice?.markets?.[0]?.title,
-          categoryId: notice?.matters?.[0]?.id,
-        }));
-
-        return {
-          ...card,
-          items,
-        };
-      }
-
-      return card;
-    })
+  return {
+    ...card,
+    items,
+  };
+}
+        return card;
+      })
+      .filter(Boolean) // remove nulls
     : [];
 
   return (
@@ -109,7 +117,7 @@ const MaisLidasSection = ({ name }) => {
 
       <div className={config.flex}>
         {cards.map((card) => (
-          <CardNews key={card?.id} {...card} />
+          <CardNews key={card?.id || Math.random()} {...card} />
         ))}
       </div>
     </section>

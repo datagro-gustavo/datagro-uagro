@@ -25,15 +25,16 @@ const TechSectionTemp = ({ mx, px, name, home = 0 }) => {
   // TODO: Busco pela categoria no proprio componente, 
   // sera que existe outra alternativa ja que no context temos uma global?
   // talvez
-  if (!config) return null;
-  if (isHome) setCategory(config?.marketId)
-  if (isNews) setCategory(notice?.markets?.[0].id)
+
 
   // crosscheck entre TODOS os cards da config e TODAS as notices
   const noticeList = Array.isArray(byCategoryTem) ? byCategoryTem : [];
 
   const sortedNotices = noticeList.sort((a, b) => (b.pin || 0) - (a.pin || 0));
 
+  console.log("=========")
+  console.log(sortedNotices)
+console.log("=========")
   const title =
     sortedNotices?.[0]?.markets?.[0]?.title || "";
 

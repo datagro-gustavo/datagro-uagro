@@ -72,8 +72,8 @@ export const NavBar = ({ props, paywall, fixed }) => {
 						>
 							<Image
 								src={Logo}
-								width={300}
-								height={300}
+								width={600}
+								height={600}
 								alt="Logo DATAGRO"
 								className={`transition-all duration-500 w-46.25 md:w-65 mt-6 `}
 								priority

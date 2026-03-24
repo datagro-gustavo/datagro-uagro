@@ -267,7 +267,7 @@ const CardNews = ({
 			return (
 				<div className={wrapperClass}>
 					<SafeImage
-						src={String(imageUrl).replace(/%22$/, "")}
+						src={imageUrl}
 						alt={title || ""}
 						className="block w-full h-full object-cover group-hover:opacity-90 transition"
 					/>
@@ -308,7 +308,7 @@ const CardNews = ({
 							{/* thumb 120x90 (4:3) */}
 							<div className="w-[120px] h-[90px] overflow-hidden  flex-shrink-0">
 								<SafeImage
-									src={String(it.imageUrl).replace(/%22$/, "")}
+									src={String(it.imageUrl)}
 									alt={it.title || ""}
 									className="block w-full h-full object-cover group-hover:opacity-90 transition"
 								/>
