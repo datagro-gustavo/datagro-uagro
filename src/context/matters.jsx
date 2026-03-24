@@ -7,7 +7,7 @@ export const MattersContext = createContext();
 
 export function MattersProvider({ children }) {
 
-    const [data,setData] = useState()
+    const [data, setData] = useState()
 
     const [renderingNotices, setRenderingNotices] = useState([]);
     const [rowNotices, setRowNotices] = useState([]);
@@ -52,40 +52,40 @@ export function MattersProvider({ children }) {
         );
     };
 
-  const getRowNoticesPage = async (pageToLoad = 1, ignored = []) => {
-  try {
-    const idsToIgnore = ignored.length ? ignored : renderingNotices;
-    const ignoredParam = idsToIgnore.length ? `&ignoredIds=${idsToIgnore.join(",")}` : "";
+    const getRowNoticesPage = async (pageToLoad = 1, ignored = []) => {
+        try {
+            const idsToIgnore = ignored.length ? ignored : renderingNotices;
+            const ignoredParam = idsToIgnore.length ? `&ignoredIds=${idsToIgnore.join(",")}` : "";
 
-    setAnimatedNotices(true);
+            setAnimatedNotices(true);
 
-    const url = `api/News/list?matters=${matter}&quantity=8&page=${pageToLoad}&lang=pt-br${ignoredParam}`;
-    const response = await api.get(url);
+            const url = `api/News/list?matters=${matter}&quantity=8&page=${pageToLoad}&lang=pt-br${ignoredParam}`;
+            const response = await api.get(url);
 
-    if (response.status !== 200) {
-      setAnimatedNotices(false);
-      return { items: [], hasMore: false };
-    }
+            if (response.status !== 200) {
+                setAnimatedNotices(false);
+                return { items: [], hasMore: false };
+            }
 
-    const data = response.data;
-    const items = Array.isArray(data.items) ? data.items : data;
+            const data = response.data;
+            const items = Array.isArray(data.items) ? data.items : data;
 
-    setRowNotices((prev) => (pageToLoad === 1 ? items : [...prev, ...items]).slice(0, MAX_ROW_ITEMS));
+            setRowNotices((prev) => (pageToLoad === 1 ? items : [...prev, ...items]).slice(0, MAX_ROW_ITEMS));
 
-    addRenderedIds(items);
-    setRowPage(pageToLoad);
+            addRenderedIds(items);
+            setRowPage(pageToLoad);
 
-    const hasNextFromApi = data.hasNextPage ?? items.length > 0;
-    const finalHasMore = hasNextFromApi && (pageToLoad * 8) < MAX_ROW_ITEMS;
-    setHasMoreRows(finalHasMore);
+            const hasNextFromApi = data.hasNextPage ?? items.length > 0;
+            const finalHasMore = hasNextFromApi && (pageToLoad * 8) < MAX_ROW_ITEMS;
+            setHasMoreRows(finalHasMore);
 
-    setAnimatedNotices(false);
-    return { items, hasMore: finalHasMore };
-  } catch (e) {
-    setAnimatedNotices(false);
-    return { items: [], hasMore: false };
-  }
-};
+            setAnimatedNotices(false);
+            return { items, hasMore: finalHasMore };
+        } catch (e) {
+            setAnimatedNotices(false);
+            return { items: [], hasMore: false };
+        }
+    };
 
     const loadMoreRowNotices = async () => {
         if (!hasMoreRows || loadingRows) return;
@@ -99,19 +99,20 @@ export function MattersProvider({ children }) {
             setLoadingRows(false);
         }
     };
+    
 
     const resetRow = () => {
         setRowNotices([]);
         setRenderingNotices([]);
         setRowPage(1);
         setHasMoreRows(true);
-        };
+    };
 
-   useEffect(() => {
+    useEffect(() => {
         if (!matter) return;
         resetRow();
         getRowNoticesPage(1, []);
-        }, [matter]);
+    }, [matter]);
 
     useEffect(() => {
         getMatters();
@@ -132,7 +133,8 @@ export function MattersProvider({ children }) {
                 loadingRows,
                 matters,
                 loadMatters,
-                data
+                data,
+                getMatters
             }}
         >
             {children}

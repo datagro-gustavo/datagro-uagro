@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import styled from "styled-components"
 
@@ -21,23 +21,37 @@ const Border = styled.div`
         display: none;
     }
 `
-const SectionNoticesMatters = ({id, slug, page}) => {
+const SectionNoticesMatters = ({ id, slug, page }) => {
 
-    
+    const [dataMatter, setDataMatter] = useState()
+
+
     const {
         rowNotices,
         hasMoreRows,
         loadMoreRowNotices,
         setMatter,
         animatedNotices,
-        data
+        data,
+        getMatters,
+        matters
     } = useContext(MattersContext)
 
     useEffect(() => {
         setMatter(id)
     }, [id, slug])
 
+    useEffect(() => {
+        getMatters()
 
+        if (matters) {
+            const data = matters.filter(item => item?.Id == id)
+            if (data) {
+                setDataMatter(data[0])
+            }
+        }
+
+    }, [id])
 
     return (
         <section>
@@ -45,14 +59,15 @@ const SectionNoticesMatters = ({id, slug, page}) => {
             <BackgroundModal />
             <div className="flex flex-row justify-center md:px-6 pb-5  ">
                 <div className='md:px-0 px-5'>
-                    <h1 className="text-[1.3rem] mt-6 font-bold text-[#319e96] uppercase ">{data?.title}</h1>
+                    <h1 className="text-[1.5rem] mt-6 h-[1.6rem] font-bold text-[#319e96] uppercase ">{dataMatter?.Name}</h1>
+                    <h2 className="text-[0.9rem] md:max-w-[620px] mt-6 font-bold text-[#319e96] uppercase ">{dataMatter?.DisplayNames}</h2>
 
-                    {animatedNotices ?<Skeleton/> :<></>}
-             
+                    {animatedNotices ? <Skeleton /> : <></>}
+
 
                     {rowNotices?.map(item => {
                         return (
-                            <CardMoreNotice title={item?.title} description={item?.description} image={item?.imageUrl} noticeId={item?.id} slug={item?.slug}  />
+                            <CardMoreNotice title={item?.title} description={item?.description} image={item?.imageUrl} noticeId={item?.id} slug={item?.slug} />
                         )
                     })}
 
