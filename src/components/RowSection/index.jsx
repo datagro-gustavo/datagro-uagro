@@ -57,9 +57,9 @@ const RowSection = ({ scrolled, name, noticeProp, title, more, index }) => {
             href: notice?.url,
             slug: notice?.slug,
             categoryId: categoryId,
-            categoryName: notice?.matters?.[0]?.title || notice?.markets?.[0]?.title,
+            categoryName: notice?.matters?.[0]?.title,
             pin: notice?.pin || 0,
-            noticeId: notice?.markets?.[0]?.id || notice?.markets?.[0]?.id,
+            noticeId: notice?.markets?.[0]?.id,
             notice,
             id: notice?.id
         };
