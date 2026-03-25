@@ -300,8 +300,7 @@ const CardNews = ({
 				{items.map((it) => (
 					<span
 						key={it.id}
-						className="group grid grid-cols-[120px,minmax(0,1fr)] gap-3 items-start cursor-pointer"
-						onClick={() => onClick(it.slug)}
+						className=" grid grid-cols-[120px,minmax(0,1fr)] gap-3 items-start cursor-pointer"
 					>
 
 						<div className="flex items-center gap-4">
@@ -310,7 +309,7 @@ const CardNews = ({
 								<SafeImage
 									src={String(it.imageUrl)}
 									alt={it.title || ""}
-									className="block w-full h-full object-cover group-hover:opacity-90 transition"
+									className="block w-full h-full object-cover :opacity-90 transition"
 								/>
 
 							</div>
@@ -318,8 +317,13 @@ const CardNews = ({
 							{/* texto: permite encolher e quebra correta */}
 							<div className="min-w-0">
 
+							<span  onClick={() => onClickGoToCategory(it?.category, it?.categoryId)} className={`cursor-pointer text-[#98bf0e] inline-flex items-center px-0 py-1 text-xs font-semibold uppercase hover:underline `}>
+							{it?.category}
+							</span>
 								
 								<h4
+										onClick={() => onClick(it.slug)}
+
 									className="text-[15px] leading-snug font-semibold text-neutral-900
                          						group-hover:underline line-clamp-3 break-words"
 									description={it.title}
@@ -557,6 +561,7 @@ const CardNews = ({
 							) : (
 								<></>
 							)} */}
+							
 						</span>
 					</div>
 				)
@@ -571,7 +576,7 @@ const CardNews = ({
 							className="hover:underline decoration-2 underline-offset-2 cursor-pointer"
 							onClick={() => onClick(slug)}
 						>
-							{!category ? <div className="mt-4"></div> : <></>}
+							{!category ? <div className="mt-4"></div> : category}
 
 							{title}
 						</span>
@@ -590,7 +595,7 @@ const CardNews = ({
 
 
 							</div> : <></>}
-
+						{category}
 						</span>
 
 						<span 	onClick={() => onClick(slug)}  className="cursor-pointer hover:underline">

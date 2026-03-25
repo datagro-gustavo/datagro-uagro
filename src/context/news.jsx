@@ -31,7 +31,7 @@ export function NewsProvider({ children }) {
   const [categoryRowSection, setCategoryRowSection] = useState(null)
   const [byCategoryRowSection, setByCategoryRowSection] = useState(null)
   const [tickerNotices, setTickerNotices] = useState([])
-  const [marketId,setMarketId] = useState()
+  const [marketId, setMarketId] = useState()
   const [notices, setNotices] = useState([]);
   const [notice, setNotice] = useState([]);
   const [statusNotice, setStatusNotice] = useState(200)
@@ -39,7 +39,7 @@ export function NewsProvider({ children }) {
   const [rowNotices, setRowNotices] = useState([]);
   const [byCategory, setByCategory] = useState([]);
   const [byCategoryTem, setByCategoryTem] = useState([]);
-  const [tag,setTag] = useState(91)
+  const [tag, setTag] = useState(91)
 
   const [renderingNotices, setRenderingNotices] = useState([]);
 
@@ -49,14 +49,14 @@ export function NewsProvider({ children }) {
   const [hasMoreRows, setHasMoreRows] = useState(true);
   const [loadingRows, setLoadingRows] = useState(false);
   const [linkColor, setLinkColor] = useState()
-  const [animatedNotices,setAnimatedNotices] = useState(false)
-  const [scrolled,setScrolled] = useState(false)
+  const [animatedNotices, setAnimatedNotices] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
   const addRenderedIds = (items) => {
     if (!items || !Array.isArray(items)) return;
-    
+
     setRenderingNotices((prev) =>
       Array.from(new Set([...prev, ...items.map((n) => n.id)]))
     );
@@ -118,7 +118,7 @@ export function NewsProvider({ children }) {
 
     fetchMarket();
   }, [culture]);
-  
+
 
 
   useEffect(() => {
@@ -190,7 +190,11 @@ export function NewsProvider({ children }) {
 
   // notícias mais lidas
   const getMostRead = async (ignored = []) => {
-    const minDate = getMinDate();
+    const minDate = new Date();
+    minDate.setDate(minDate.getDate());
+    const maxDate = new Date();
+    const minDateFormatted = minDate.toISOString().split("T")[0];
+
     const idsToIgnore = ignored.length ? ignored : renderingNotices;
 
     let url = `api/News/list?sort=1&quantity=30&lang=${langCode}&ignoredIds=${idsToIgnore.join(",")}`;
@@ -200,8 +204,8 @@ export function NewsProvider({ children }) {
     if (response.status !== 200);
 
     const data = response.data;
-  const list = data.slice(0, 6);   // ranking lateral
-const card = data.slice(6, 13);  // 7 itens (1 main + 6 resto)
+    const list = data.slice(0, 6);   // ranking lateral
+    const card = data.slice(6, 13);  // 7 itens (1 main + 6 resto)
     setMostRead([list, card]);
     addRenderedIds(data);
 
@@ -224,7 +228,7 @@ const card = data.slice(6, 13);  // 7 itens (1 main + 6 resto)
     const minDate = getMinDate();
     let url = `api/News/List?quantity=5&sort=2&lang=${langCode}&minDate=${minDate}`;
     url = category ? getByCategorySection(url, category) : withMarket(url);
-  
+
     const response = await api.get(url);
     if (response.status !== 200);
 
@@ -238,7 +242,7 @@ const card = data.slice(6, 13);  // 7 itens (1 main + 6 resto)
     const minDate = getMinDate();
     const idsToIgnore = ignored.length ? ignored : renderingNotices;
 
-    let url = `api/News/List?quantity=70&lang=${langCode}&ignoredIds=${idsToIgnore.join(",")}`;
+    let url = `api/News/List?quantity=30&lang=${langCode}&ignoredIds=${idsToIgnore.join(",")}`;
     const response = await api.get(url);
 
     if (response.status !== 200);
@@ -286,8 +290,8 @@ const card = data.slice(6, 13);  // 7 itens (1 main + 6 resto)
   const getRowNoticesPage = async (pageToLoad = 1, ignored = []) => {
     const minDate = getMinDate();
     const idsToIgnore = ignored.length ? ignored : renderingNotices;
-    
-    
+
+
     if (pageType == 'home') {
       let url = `api/News/list?sort=1&quantity=8&page=${pageToLoad}&lang=${langCode}&minDate=2025-02-23&ignoredIds=${idsToIgnore.join(
         ","
@@ -321,7 +325,7 @@ const card = data.slice(6, 13);  // 7 itens (1 main + 6 resto)
       return { items, hasMore: finalHasMore };
     }
 
-     if (pageType == 'notices' || pageType == "news") {
+    if (pageType == 'notices' || pageType == "news") {
       setAnimatedNotices(true)
       let url = `api/News/list?sort=1&quantity=8page=${pageToLoad}&lang=${langCode}&minDate=${minDate}&ignoredIds=${idsToIgnore.join(
         ","
@@ -354,10 +358,10 @@ const card = data.slice(6, 13);  // 7 itens (1 main + 6 resto)
       setAnimatedNotices(false)
       return { items, hasMore: finalHasMore };
     }
-    
-     if (pageType == 'tags') {
+
+    if (pageType == 'tags') {
       const pageLoadTag = 0
-    
+
       setAnimatedNotices(true)
       let url = `api/News/list?&tags=91&sort=1&quantity=8&page=${pageLoadTag}&lang=${langCode}`;
       url = withMarket(url);

@@ -74,7 +74,10 @@ export default function Landing() {
             <InstagramStories />
             <BackgroundInstagram />
             {/* <TechSection px={'px-6'} /> */}
+
+            <div className="md:px-6">
             <InfiniteScroll page="home" />
+            </div>
             <Footer />
             <ModalSign />
         </main >

@@ -32,9 +32,7 @@ const TechSectionTemp = ({ mx, px, name, home = 0 }) => {
 
   const sortedNotices = noticeList.sort((a, b) => (b.pin || 0) - (a.pin || 0));
 
-  console.log("=========")
-  console.log(sortedNotices)
-console.log("=========")
+
   const title =
     sortedNotices?.[0]?.markets?.[0]?.title || "";
 

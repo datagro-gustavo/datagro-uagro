@@ -17,6 +17,8 @@ const MaisLidasSection = ({ name }) => {
 
   const [mainNotice, ...restFromCards] = cardNotices;
 
+  console.log(mainNotice)
+
 
   // pega lista SEM repetir o main
   const fallbackList = listaNotices.filter(
@@ -40,7 +42,7 @@ const MaisLidasSection = ({ name }) => {
             noticeId: notice?.markets?.[0]?.id,
             categoryId: notice?.matters?.[0]?.id,
 
-            category: notice?.matters?.[0]?.title,
+            category: notice?.matters?.[0]?.title || notice?.markets?.[0]?.title,
             number: i + 1,
           }));
 
@@ -60,7 +62,7 @@ const MaisLidasSection = ({ name }) => {
             noticeId: mainNotice?.markets?.[0]?.id,
             id: mainNotice?.id,
             slug: mainNotice?.slug,
-            category: mainNotice?.matters?.[0]?.title ?? card.category,
+            category: mainNotice?.matters?.[0]?.title  || mainNotice?.markets?.[0]?.title,
             categoryId: mainNotice?.matters?.[0]?.id ?? card.categoryId,
             imageUrl: mainNotice.imageUrl ?? card.imageUrl,
           };
@@ -75,7 +77,7 @@ if (card.id === "ml-col2-stack") {
     noticeId: notice?.markets?.[0]?.id,
     title: notice.title,
     imageUrl: notice.imageUrl,
-    category: notice?.matters?.[0]?.title,
+    category: notice?.matters?.[0]?.title || notice?.markets?.[0]?.title,
     categoryId: notice?.matters?.[0]?.id,
   }));
 
@@ -94,7 +96,7 @@ if (card.id === "ml-col3-stack") {
     noticeId: notice?.markets?.[0]?.id,
     title: notice.title,
     imageUrl: notice.imageUrl,
-    category: notice?.matters?.[0]?.title,
+    category: notice?.matters?.[0]?.title || notice?.markets?.[0]?.title,
     categoryId: notice?.matters?.[0]?.id,
   }));
 

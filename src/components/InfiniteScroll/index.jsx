@@ -94,7 +94,7 @@ const Notices = ({page}) => {
   return (
 
     <section >
-      <div className="flex flex-row justify-items-start md:px-12 pb-5 xl:max-w-7xl 2xl:max-w-412.5 mx-auto py-8">
+      <div className="flex flex-row justify-items-start px-6 md:px-12 pb-5 xl:max-w-7xl 2xl:max-w-412.5 mx-auto py-8">
         <h2 className="text-2xl md:text-3xl font-medium mb-2 ">Mais Notícias</h2>
       </div>
       {chunks.map((group, index) => (
