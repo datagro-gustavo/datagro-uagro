@@ -64,7 +64,7 @@ export default function Landing() {
                 <div className="flex xl:max-w-[1280px] 2xl:max-w-[1650px] mx-auto md:px-6 py-7">
                     <div className="w-full" >
                         <MaisLidasSection />
-                        <TechSectionTemp name={"Mais notícias"} />
+                        <TechSectionTemp  />
                         <Image src={banner} width={900} className="mt-6" height={900}/>
                     </div>
                     <Border className="hidden md:flex border border-r-0 ml-5 mr-5 border-slate-500 h-[auto]" />
