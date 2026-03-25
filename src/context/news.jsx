@@ -193,15 +193,15 @@ export function NewsProvider({ children }) {
     const minDate = getMinDate();
     const idsToIgnore = ignored.length ? ignored : renderingNotices;
 
-    let url = `api/News/list?sort=1&quantity=20&lang=${langCode}&minDate=${minDate}&ignoredIds=${idsToIgnore.join(",")}`;
+    let url = `api/News/list?sort=1&quantity=30&lang=${langCode}&ignoredIds=${idsToIgnore.join(",")}`;
     url = withMarket(url);
 
     const response = await api.get(url);
     if (response.status !== 200);
 
     const data = response.data;
-    const list = data.slice(0, 6);
-    const card = data.slice(5);
+  const list = data.slice(0, 6);   // ranking lateral
+const card = data.slice(6, 13);  // 7 itens (1 main + 6 resto)
     setMostRead([list, card]);
     addRenderedIds(data);
 

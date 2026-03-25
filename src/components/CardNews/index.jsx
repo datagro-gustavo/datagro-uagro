@@ -317,6 +317,8 @@ const CardNews = ({
 
 							{/* texto: permite encolher e quebra correta */}
 							<div className="min-w-0">
+
+								
 								<h4
 									className="text-[15px] leading-snug font-semibold text-neutral-900
                          						group-hover:underline line-clamp-3 break-words"

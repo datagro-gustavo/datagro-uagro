@@ -1,13 +1,14 @@
 
 'use client'
 
+import Image from "next/image";
+
 import React, { useState, useEffect } from "react";
 
 /* OUTHER COMPONENTS */
 import styled from "styled-components";
 
 /* NEXT COMPONENTS */
-import Image from "next/image";
 
 /* IMAGES */
 import banner from '../../assets/banners/banner.png'
@@ -63,8 +64,8 @@ export default function Landing() {
                 <div className="flex xl:max-w-[1280px] 2xl:max-w-[1650px] mx-auto md:px-6 py-7">
                     <div className="w-full" >
                         <MaisLidasSection />
-                        <TechSectionTemp />
-                       
+                        <TechSectionTemp name={"Mais notícias"} />
+                        <Image src={banner} width={900} className="mt-6" height={900}/>
                     </div>
                     <Border className="hidden md:flex border border-r-0 ml-5 mr-5 border-slate-500 h-[auto]" />
                     <Aside />

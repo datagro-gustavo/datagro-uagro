@@ -17,6 +17,7 @@ const MaisLidasSection = ({ name }) => {
 
   const [mainNotice, ...restFromCards] = cardNotices;
 
+
   // pega lista SEM repetir o main
   const fallbackList = listaNotices.filter(
     (n) => n.id !== mainNotice?.id
