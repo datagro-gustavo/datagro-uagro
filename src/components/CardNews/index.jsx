@@ -595,7 +595,6 @@ const CardNews = ({
 
 
 							</div> : <></>}
-						{category}
 						</span>
 
 						<span 	onClick={() => onClick(slug)}  className="cursor-pointer hover:underline">
