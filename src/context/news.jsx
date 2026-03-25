@@ -293,7 +293,7 @@ export function NewsProvider({ children }) {
 
 
     if (pageType == 'home') {
-      let url = `api/News/list?sort=1&quantity=8&page=${pageToLoad}&lang=${langCode}&minDate=2025-02-23&ignoredIds=${idsToIgnore.join(
+      let url = `api/News/list?sort=1&quantity=8&page=${pageToLoad}&lang=${langCode}&ignoredIds=${idsToIgnore.join(
         ","
       )}`;
       url = withMarket(url);
