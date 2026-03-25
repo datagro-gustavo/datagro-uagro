@@ -576,7 +576,7 @@ const CardNews = ({
 							className="hover:underline decoration-2 underline-offset-2 cursor-pointer"
 							onClick={() => onClick(slug)}
 						>
-							{!category ? <div className="mt-4"></div> : category}
+							{!category ? <div className="mt-4"></div> : <></>}
 
 							{title}
 						</span>
