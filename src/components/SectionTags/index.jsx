@@ -53,7 +53,7 @@ const SectionNoticesTags = ({slug, page}) => {
 
                     {rowNotices?.map(item => {
                         return (
-                            <CardMoreNotice title={item?.title} description={item?.description} image={item?.imageUrl} noticeId={item?.id} slug={item?.slug} />
+                            <CardMoreNotice title={item?.title} publishDate={item?.publishDate} description={item?.description} image={item?.imageUrl} noticeId={item?.id} slug={item?.slug} />
                         )
                     })}
 
