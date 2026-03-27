@@ -37,10 +37,8 @@ const HeroSection = ({ scrolled, layout, fixed, px = '', marketId }) => {
 
         const notice = sortedNotices[i];
 
-        const categories =
-            notice?.matters?.map((m) => m?.title).filter(Boolean) || [];
+        const categories = notice?.matters || [];
 
-        const categoryId = notice?.matters?.[0]?.id;
 
         let listItems = card.listItems || [];
 
@@ -76,8 +74,7 @@ const HeroSection = ({ scrolled, layout, fixed, px = '', marketId }) => {
                 ...(card?.priority === "high" && notice?.description != null && notice?.description !== "" && { description: notice?.description }),
                 imageUrl: notice[0]?.imageUrl,
                 href: notice?.url,
-                category: categories.join(" / ") || undefined,
-                categoryId: categoryId || undefined,
+                category: categories,
                 pin: notice?.pin || 0,
                 slug: notice?.slug,
                 notice,
@@ -99,8 +96,7 @@ const HeroSection = ({ scrolled, layout, fixed, px = '', marketId }) => {
             ...(notice?.title != null && notice?.title !== "" && { title: notice?.title }),
             ...(notice?.imageUrl != null && notice?.imageUrl !== "" && { imageUrl: notice?.imageUrl }),
             href: notice?.url,
-            category: categories.join(" / ") || undefined,
-            categoryId: categoryId || undefined,
+            category: categories,
             pin: notice?.pin || 0,
             slug: notice?.slug,
             notice,

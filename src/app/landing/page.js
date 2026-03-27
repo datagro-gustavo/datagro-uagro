@@ -63,7 +63,7 @@ export default function Landing() {
                 <HeroSection layout={"hero"} px={'px-6'} />
                 <div className="flex xl:max-w-[1280px] 2xl:max-w-[1650px] mx-auto md:px-6 py-7">
                     <div className="w-full" >
-                        <MaisLidasSection />
+                        <MaisLidasSection name={"Mais lidas"} />
                         <TechSectionTemp  />
                         <Image src={banner} width={900} className="mt-6" height={900}/>
                     </div>

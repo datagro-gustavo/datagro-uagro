@@ -204,9 +204,9 @@ export function NewsProvider({ children }) {
     if (response.status !== 200);
 
     const data = response.data;
-    const list = data.slice(0, 6);   // ranking lateral
-    const card = data.slice(6, 13);  // 7 itens (1 main + 6 resto)
-    setMostRead([list, card]);
+    // const list = data.slice(0, 6);   // ranking lateral
+    // const card = data.slice(6, 13);  // 7 itens (1 main + 6 resto)
+    setMostRead(data);
     addRenderedIds(data);
 
     return data.map((n) => n.id);

@@ -39,8 +39,7 @@ const TechSectionTemp = ({ mx, px, name, home = 0 }) => {
   config.qtd_cards = config.qtd_cards.map((card, i) => {
     const notice = sortedNotices[i];
 
-    const categories =
-      notice?.matters?.map(m => m?.title).filter(Boolean) || [];
+    const categories = notice?.matters || [];
 
     return {
       ...card,
@@ -48,8 +47,7 @@ const TechSectionTemp = ({ mx, px, name, home = 0 }) => {
       ...(notice?.title && { title: notice?.title }),
       ...(notice?.imageUrl && { imageUrl: notice?.imageUrl }),
       href: notice?.url,
-    category: notice?.matters?.[0]?.title || notice?.markets?.[0]?.title,
-      categoryId: notice?.matters?.[0]?.id || notice?.markets?.[0]?.id,
+      category: categories,
       slug: notice?.slug,
       pin: notice?.pin || 0,
       noticeId: sortedNotices?.[0]?.markets?.[0]?.id,
@@ -62,7 +60,7 @@ const TechSectionTemp = ({ mx, px, name, home = 0 }) => {
   return (
     <section style={{ marginTop: "0rem" }} className={` xl:max-w-[1280px] 2xl:max-w-[1650px]   mx-auto md:${px} mb-9`}>
       <header className="mb-0">
-        
+
         {name
           ?
           <h2 className="text-2xl md:text-3xl  font-medium mb-6 "> {name}</h2>

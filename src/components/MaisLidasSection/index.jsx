@@ -1,130 +1,83 @@
 'use client'
 
-import React, { useContext } from "react";
+import React, { use, useContext, useEffect, useState } from "react";
 import { getSessionConfig } from "../../utils/getSessionConfig";
 import CardNews from "../CardNews";
+import styled from "styled-components";
 import { NewsContext } from "../../context/news";
 
-const MaisLidasSection = ({ name }) => {
-  const config = getSessionConfig("mais-lidas");
-  const { mostRead } = useContext(NewsContext);
+const Clean = styled.div`
+  height:${props => props.scrolled ? "13.2rem" : "0"};
 
-  if (!config) return null;
+  @media screen and (max-width:920px){
 
-  // separa mostRead em [lista, cards]
-  const listaNotices = Array.isArray(mostRead?.[0]) ? mostRead[0] : [];
-  const cardNotices = Array.isArray(mostRead?.[1]) ? mostRead[1] : [];
+  height:${props => props.scrolled ? "5.2rem" : "0"};
+    
+  }`;
 
-  const [mainNotice, ...restFromCards] = cardNotices;
+const TechSectionTemp = ({ mx, px, name, home = 0 }) => {
 
-  console.log(mainNotice)
+  const isHome = location.pathname === "/"
+  const isNews = location.pathname.startsWith("/news");
+
+  const config = getSessionConfig("tech");
+  const { byCategory, setCategory, category, notice, mostRead } = useContext(NewsContext)
+  // TODO: Busco pela categoria no proprio componente, 
+  // sera que existe outra alternativa ja que no context temos uma global?
+  // talvez
 
 
-  // pega lista SEM repetir o main
-  const fallbackList = listaNotices.filter(
-    (n) => n.id !== mainNotice?.id
-  );
+  // crosscheck entre TODOS os cards da config e TODAS as notices
+  const noticeList = Array.isArray(mostRead) ? mostRead : [];
 
-  // junta tudo (prioridade pro cardNotices)
-  const restNotices = [...restFromCards, ...fallbackList];
+  const sortedNotices = noticeList.sort((a, b) => (b.pin || 0) - (a.pin || 0));
 
-  const cards = Array.isArray(config.qtd_cards)
-    ? config.qtd_cards
-      .map((card, index) => {
 
-        // 1) Lista lateral (ranking)
-        if (index === 0) {
-          const listItems = listaNotices.map((notice, i) => ({
-            id: notice.id ?? i,
-            href: notice.url,
-            title: notice.title,
-            slug: notice.slug,
-            noticeId: notice?.markets?.[0]?.id,
-            categoryId: notice?.matters?.[0]?.id,
+  const title =
+    sortedNotices?.[0]?.markets?.[0]?.title || "";
 
-            category: notice?.matters?.[0]?.title || notice?.markets?.[0]?.title,
-            number: i + 1,
-          }));
+  config.qtd_cards = config.qtd_cards.map((card, i) => {
+    const notice = sortedNotices[i];
 
-          return {
-            ...card,
-            listItems,
-          };
-        }
+    const categories = notice?.matters || [];
 
-        // 2) Destaque principal
-        if (card.id === "ml-main-highlight" && mainNotice) {
-          return {
-            ...card,
-            title: mainNotice.title ?? card.title,
-            description: mainNotice.description ?? card.description,
-            href: mainNotice.url ?? card.href,
-            noticeId: mainNotice?.markets?.[0]?.id,
-            id: mainNotice?.id,
-            slug: mainNotice?.slug,
-            category: mainNotice?.matters?.[0]?.title  || mainNotice?.markets?.[0]?.title,
-            categoryId: mainNotice?.matters?.[0]?.id ?? card.categoryId,
-            imageUrl: mainNotice.imageUrl ?? card.imageUrl,
-          };
-        }
 
-  // Coluna 2 (3 itens)
-if (card.id === "ml-col2-stack") {
-  const items = restNotices.slice(0, 3).map((notice, i) => ({
-    id: notice.id ?? i,
-    href: notice.url,
-    slug: notice.slug,
-    noticeId: notice?.markets?.[0]?.id,
-    title: notice.title,
-    imageUrl: notice.imageUrl,
-    category: notice?.matters?.[0]?.title || notice?.markets?.[0]?.title,
-    categoryId: notice?.matters?.[0]?.id,
-  }));
+    return {
+      ...card,
+      ...(card?.priority === 'high' && { description: notice?.description }),
+      ...(notice?.title && { title: notice?.title }),
+      ...(notice?.imageUrl && { imageUrl: notice?.imageUrl }),
+      href: notice?.url,
+      category: categories,
+      slug: notice?.slug,
+      pin: notice?.pin || 0,
+      noticeId: sortedNotices?.[0]?.markets?.[0]?.id,
+      notice,
+      id: notice?.id,
+    };
+  });
 
-  return {
-    ...card,
-    items,
-  };
-}
-
-// Coluna 3 (3 itens)
-if (card.id === "ml-col3-stack") {
-  const items = restNotices.slice(3, 6).map((notice, i) => ({
-    id: notice.id ?? i,
-    href: notice.url,
-    slug: notice.slug,
-    noticeId: notice?.markets?.[0]?.id,
-    title: notice.title,
-    imageUrl: notice.imageUrl,
-    category: notice?.matters?.[0]?.title || notice?.markets?.[0]?.title,
-    categoryId: notice?.matters?.[0]?.id,
-  }));
-
-  return {
-    ...card,
-    items,
-  };
-}
-        return card;
-      })
-      .filter(Boolean) // remove nulls
-    : [];
 
   return (
-    <section className="mb-9">
-      <header className="mb-4">
-        <h2 className="text-2xl md:text-3xl font-extrabold">
-          {name ? name : config.title}
-        </h2>
+    <section style={{ marginTop: "0rem" }} className={` xl:max-w-[1280px] 2xl:max-w-[1650px]   mx-auto md:${px} mb-9`}>
+      <header className="mb-0">
+
+        {name
+          ?
+          <h2 className="text-2xl md:text-3xl  font-medium mb-6 "> {name}</h2>
+
+          : <h2 className="text-2xl md:text-3xl font-medium mb-6 ">{title}</h2>}
       </header>
 
+      {/* Container com o layout definido na config.flex */}
       <div className={config.flex}>
-        {cards.map((card) => (
-          <CardNews key={card?.id || Math.random()} {...card} />
+        {/* Mapeamos APENAS os cards desta sessão */}
+        {config.qtd_cards.map((card) => (
+          <CardNews key={card.id} {...card} />
         ))}
       </div>
     </section>
   );
 };
 
-export default MaisLidasSection;
+export default TechSectionTemp;

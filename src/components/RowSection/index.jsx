@@ -41,8 +41,7 @@ const RowSection = ({ scrolled, name, noticeProp, title, more, index }) => {
     config.qtd_cards = config.qtd_cards.map((card, i) => {
         const notice = sortedNotices[i];
 
-        const categories =
-            notice?.matters?.map(m => m).filter(Boolean) || [];
+            const categories = notice?.matters || [];
 
 
         const categoryId = notice?.matters?.[0]?.id;
@@ -56,6 +55,7 @@ const RowSection = ({ scrolled, name, noticeProp, title, more, index }) => {
             ...(notice?.imageUrl && { imageUrl: notice?.imageUrl }),
             href: notice?.url,
             slug: notice?.slug,
+            categories:categories,
             categoryId: categoryId,
             categoryName: notice?.matters?.[0]?.title,
             pin: notice?.pin || 0,

@@ -317,12 +317,12 @@ const CardNews = ({
 							{/* texto: permite encolher e quebra correta */}
 							<div className="min-w-0">
 
-							<span  onClick={() => onClickGoToCategory(it?.category, it?.categoryId)} className={`cursor-pointer text-[#98bf0e] inline-flex items-center px-0 py-1 text-xs font-semibold uppercase hover:underline `}>
-							{it?.category}
-							</span>
-								
+								<span onClick={() => onClickGoToCategory(it?.category, it?.categoryId)} className={`cursor-pointer text-[#98bf0e] inline-flex items-center px-0 py-1 text-xs font-semibold uppercase hover:underline `}>
+									{it?.category}
+								</span>
+
 								<h4
-										onClick={() => onClick(it.slug)}
+									onClick={() => onClick(it.slug)}
 
 									className="text-[15px] leading-snug font-semibold text-neutral-900
                          						group-hover:underline line-clamp-3 break-words"
@@ -401,24 +401,20 @@ const CardNews = ({
 					</span>
 
 					<div className="lg:col-span-7 flex flex-col justify-start">
-						{category && (
-							<div className="mb-1">
-
-								<span className={`cursor-pointer text-xs  font-semibold uppercase tracking-wide text-[#98bf0e] hover:underline `} onClick={() => onClickGoToCategory(category, categoryId)}>
-									{!category ?
-										<Skeleton className="w-full h-full object-cover" />
-
-										: category.Name}
-									{/* {lock === 3 ? (
-										<>
-											<Lock className="ml-1 h-4" />
-										</>
-									) : (
-										<></>
-									)} */}
-								</span>
+						{Array.isArray(category) && category.length > 0 && (
+							<div className="flex flex-wrap gap-2 mt-3 mb-2">
+								{category.map((cat) => (
+									<span
+										key={cat.id}
+										onClick={() => onClickGoToCategory(cat.title, cat.id)}
+										className="cursor-pointer text-[#98bf0e] text-xs font-semibold uppercase hover:underline"
+									>
+										{cat.title}
+									</span>
+								))}
 							</div>
 						)}
+
 						{title && (
 							<p className="text-[1.3rem] font-extrabold leading-snug text-neutral-900">
 								<span className="hover:underline decoration-2 underline-offset-2 cursor-pointer"
@@ -542,31 +538,19 @@ const CardNews = ({
 
 			{/* Corpo do card */}
 			<div className="" >
-				{/* Categoria estilo "pílula" */}
-				{category && (
-					<div className={`${styles?.bottomTextPrimary} ${styles?.marginTopCategory} `} onClick={() => onClickGoToCategory(category, categoryId)}>
-						<span className={`cursor-pointer text-[#98bf0e] inline-flex items-center px-0 py-1 text-xs font-semibold uppercase hover:underline `}>
-							{!category ? <div style={{ height: "1rem" }}></div> : <></>}
-							{!category ? (
-								<Skeleton width={"40%"} height={"15px"} />
-							) : typeof category === "number" ? (
-								categoryName
-							) : (
-								category
-							)}
-							{/* {lock === 3 ? (
-								<>
-									<Lock className="ml-1 h-4" />
-								</>
-							) : (
-								<></>
-							)} */}
-							
-						</span>
+				{Array.isArray(category) && category.length > 0 && (
+					<div className="flex flex-wrap gap-2 mt-3 mb-2">
+						{category.map((cat) => (
+							<span
+								key={cat.id}
+								onClick={() => onClickGoToCategory(cat.title, cat.id)}
+								className="cursor-pointer text-[#98bf0e] text-xs font-semibold uppercase hover:underline"
+							>
+								{cat.title}
+							</span>
+						))}
 					</div>
-				)
-
-				}
+				)}
 
 
 				{/* Manchete */}
@@ -597,7 +581,7 @@ const CardNews = ({
 							</div> : <></>}
 						</span>
 
-						<span 	onClick={() => onClick(slug)}  className="cursor-pointer hover:underline">
+						<span onClick={() => onClick(slug)} className="cursor-pointer hover:underline">
 							{!title ? <div style={{ height: "1.1rem" }}> <Skeleton width={"80%"} height={"15px"} /></div> : <></>}
 
 							{!title ? <Skeleton width={"70%"} height={"15px"} /> : title}
