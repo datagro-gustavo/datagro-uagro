@@ -539,18 +539,25 @@ const CardNews = ({
 			{/* Corpo do card */}
 			<div className="" >
 				{Array.isArray(category) && category.length > 0 && (
-					<div className="flex flex-wrap gap-2 mt-3 mb-2">
-						{category.map((cat) => (
-							<span
-								key={cat.id}
-								onClick={() => onClickGoToCategory(cat.title, cat.id)}
-								className="cursor-pointer text-[#98bf0e] text-xs font-semibold uppercase hover:underline"
-							>
-								{cat.title}
-							</span>
+					<div className="flex flex-wrap items-center gap-1 mt-3 mb-2">
+						{category.map((cat, index) => (
+							<React.Fragment key={cat.id}>
+								<span
+									onClick={() => onClickGoToCategory(cat.title, cat.id)}
+									className="cursor-pointer text-[#98bf0e] text-xs font-semibold uppercase hover:underline"
+								>
+									{cat.title}
+								</span>
+
+								{/* separador */}
+								{index < category.length - 1 && (
+									<span className="text-neutral-400 mx-1">/</span>
+								)}
+							</React.Fragment>
 						))}
 					</div>
 				)}
+
 
 
 				{/* Manchete */}

@@ -53,21 +53,29 @@ const SectionNoticesMatters = ({ id, slug, page }) => {
 
     }, [id])
 
+    console.log(rowNotices)
+
     return (
         <section>
             <NavBar />
             <BackgroundModal />
-            <div className="flex flex-row justify-center md:px-6 pb-5  ">
-                <div className='md:px-0 px-5'>
-                    <h1 className="text-[1.5rem] mt-6 h-[1.6rem] font-bold text-[#319e96] uppercase ">{dataMatter?.Name}</h1>
-                    <h2 className="text-[0.9rem] md:max-w-[620px] mt-6 font-bold text-[#319e96] uppercase ">{dataMatter?.DisplayNames}</h2>
+            <div className=" flex flex-col flex md:flex-row md:px-20 md:justify-center  ">
+                <div className='md:px-0 px-5 md:max-w-[920px]'>
+
+                    <div className='flex items-center gap-5 py-4'>
+                        <div className='w-[5px] h-[79px] bg-[#98BF0E] rounded-[15px]'/>
+                        <div>
+                            <h1 className="text-[1.5rem] mt-0 h-[1.31rem] font-bold text-[#000000]  ">{dataMatter?.Name}</h1>
+                            <h2 className="text-[0.9rem] md:max-w-[420px] mt-6 font-medium text-[#000000]  ">{dataMatter?.DisplayNames}</h2>
+                        </div>
+                    </div>
 
                     {animatedNotices ? <Skeleton /> : <></>}
 
 
                     {rowNotices?.map(item => {
                         return (
-                            <CardMoreNotice title={item?.title} description={item?.description} image={item?.imageUrl} noticeId={item?.id} slug={item?.slug} />
+                            <CardMoreNotice title={item?.title} publishDate={item?.publishDate} matters={item?.matters} description={item?.description} image={item?.imageUrl} noticeId={item?.id} slug={item?.slug} />
                         )
                     })}
 
@@ -83,8 +91,11 @@ const SectionNoticesMatters = ({ id, slug, page }) => {
 
                 </div>
                 {rowNotices.length == 0 ? <div className='w-[440px]' /> : ''}
-                <Border className="hidden mr-3 ml-3 md:flex border border-r-0 ml-0 mr-0 border-slate-500 h-[auto]" />
-                <Aside />
+
+                <div className='ml-30 flex'>
+                    <Border className="hidden mr-15 ml-3 md:flex border border-r-0 ml-0 mr-0 border-slate-500 h-[auto]" />
+                    <Aside />
+                </div>
             </div>
             <Footer />
             <Sidebar />
