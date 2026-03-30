@@ -55,7 +55,7 @@ const RowSection = ({ scrolled, name, noticeProp, title, more, index }) => {
             ...(notice?.imageUrl && { imageUrl: notice?.imageUrl }),
             href: notice?.url,
             slug: notice?.slug,
-            categories:categories,
+            category:categories,
             categoryId: categoryId,
             categoryName: notice?.matters?.[0]?.title,
             pin: notice?.pin || 0,

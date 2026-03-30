@@ -281,9 +281,22 @@ const CardNews = ({
 			</div>
 		);
 	};
+
+	const slugify = (text) => {
+  return text
+    ?.toString()
+    .toLowerCase()
+    .normalize("NFD") // remove acentos
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-") // espaços -> hífen
+    .replace(/[^\w-]+/g, "") // remove caracteres especiais
+    .replace(/--+/g, "-") // evita múltiplos hífens
+    .trim();
+};
+
 	const onClick = (slug) => {
 
-		router.push(`/${slug}`)
+		router.push(`/${slugify(category[0]?.title)}/${slug}`)
 	}
 
 	const onClickGoToCategory = (category, categoryId) => {

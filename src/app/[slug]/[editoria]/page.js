@@ -11,10 +11,10 @@ async function getNewsBySlug(slug) {
 }
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
+  const { slug,editoria } = await params;
 
-  const data = await getNewsBySlug(slug);
-  const canonical = `https://www.uagro.com.br/${slug}`;
+  const data = await getNewsBySlug(editoria);
+  const canonical = `https://www.uagro.com.br/${editoria}`;
 
   return {
     title: data?.title ?? "Universo Agro",
@@ -30,9 +30,12 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function News({ params }) {
-  const { slug } = await params;
+  const { slug,editoria } = await params;
 
-  const data = await getNewsBySlug(slug);
+  console.log(await params)
+
+
+  const data = await getNewsBySlug(editoria);
 
   return <SectionNews id={data?.id} slug={slug}  />;
 }
