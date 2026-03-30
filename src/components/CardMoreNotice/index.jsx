@@ -52,9 +52,27 @@ const CardMoreNotice = ({ title, description, image, noticeId, slug, matters, pu
         const diffInDays = Math.floor(diffInHours / 24);
         return `${diffInDays} dia${diffInDays > 1 ? "s" : ""}`;
     };
+
+
+    
+	const slugify = (text) => {
+  return text
+    ?.toString()
+    .toLowerCase()
+    .normalize("NFD") // remove acentos
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-") // espaços -> hífen
+    .replace(/[^\w-]+/g, "") // remove caracteres especiais
+    .replace(/--+/g, "-") // evita múltiplos hífens
+    .trim();
+};
     const handleRedirectToNewsPage = (slug) => {
 
-        router.push(`/noticia/${slug}`)
+
+        const category = matters[0]?.title || markets[0]?.title
+
+
+        router.push(`/${slugify(category)}/${slug}`)
     }
     const handleRedirectToEditoriaPage = (id,name) => {
         router.push(`/editoria/${id}/${name}`)

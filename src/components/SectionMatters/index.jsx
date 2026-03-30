@@ -75,7 +75,7 @@ const SectionNoticesMatters = ({ id, slug, page }) => {
 
                     {rowNotices?.map(item => {
                         return (
-                            <CardMoreNotice title={item?.title} publishDate={item?.publishDate} matters={item?.matters} description={item?.description} image={item?.imageUrl} noticeId={item?.id} slug={item?.slug} />
+                            <CardMoreNotice title={item?.title} publishDate={item?.publishDate} matters={item?.matters} markets={item?.markets} description={item?.description} image={item?.imageUrl} noticeId={item?.id} slug={item?.slug} />
                         )
                     })}
 
