@@ -283,12 +283,6 @@ const CardNews = ({
 	};
 	const onClick = (slug) => {
 
-		console.log("aqui poha")
-		console.log(category)
-
-
-		return
-
 		router.push(`/${slug}`)
 	}
 
