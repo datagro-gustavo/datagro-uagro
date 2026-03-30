@@ -10,18 +10,35 @@ export const Noticias = ({ props }) => {
     const { getAll, pageType,tickerNotices} = useContext(NewsContext)
     const router = useRouter()
 
+    	const slugify = (text) => {
+  return text
+    ?.toString()
+    .toLowerCase()
+    .normalize("NFD") // remove acentos
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-") // espaços -> hífen
+    .replace(/[^\w-]+/g, "") // remove caracteres especiais
+    .replace(/--+/g, "-") // evita múltiplos hífens
+    .trim();
+};
+
 
     useEffect(() => {
         getAll()
     },[])
 
     const ultimasNoticias = Array.isArray(tickerNotices)
-        ? tickerNotices.map(({ title, url, slug }) => ({ title, url,slug })).filter(item => item.title)
+        ? tickerNotices.map(({ title, url, slug,matters,markets }) => ({ title, url,slug,matters,markets })).filter(item => item.title)
         : [];
 
 
 
-    const handleRedirectToNoticePage = (slug) => {
+    const handleRedirectToNoticePage = (slug,data) => {
+
+        
+        const category = data?.matters[0]?.title || data?.markets[0]?.title
+
+
         const link = String(slug)
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '')
@@ -29,7 +46,7 @@ export const Noticias = ({ props }) => {
             .trim()
             .replace(/\s+/g, '-')
             .toLowerCase();
-            router.push(`/noticia/${slug}`)
+            router.push(`/${slugify(category)}/${data?.slug}`)
 
     }
     const data = false;
@@ -59,7 +76,7 @@ export const Noticias = ({ props }) => {
 
                         {ultimasNoticias.map((txt, idx) => (
                             <div className='border-r pl-5 pr-5 border-[#E3E3E3]'>
-                                <span key={`${idx}-${txt}`} className="cursor-pointer text-sm whitespace-nowrap text-white " onClick={() => handleRedirectToNoticePage(txt?.slug) }>
+                                <span key={`${idx}-${txt}`} className="cursor-pointer text-sm whitespace-nowrap text-white " onClick={() => handleRedirectToNoticePage(txt?.slug,txt) }>
                                     {txt.title}
                                 </span>
                             </div>
