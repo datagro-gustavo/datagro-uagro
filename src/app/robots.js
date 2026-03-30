@@ -4,7 +4,7 @@ export default function robots() {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/api"], // opcional
+        disallow: ["/admin", "/api","publicador.uagro.com.br"], // opcional
       },
     ],
     sitemap: "https://uagro.com.br/sitemap.xml",
