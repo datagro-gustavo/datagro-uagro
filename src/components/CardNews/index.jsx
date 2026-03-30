@@ -283,7 +283,7 @@ const CardNews = ({
 	};
 	const onClick = (slug) => {
 
-		router.push(`/noticia/${slug}`)
+		router.push(`/${slug}`)
 	}
 
 	const onClickGoToCategory = (category, categoryId) => {

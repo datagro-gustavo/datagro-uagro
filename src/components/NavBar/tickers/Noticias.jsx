@@ -2,11 +2,13 @@
 
 import React, { useContext, useEffect } from 'react'
 import Marquee from "react-fast-marquee";
+import { useRouter } from "next/navigation";
 
 import { NewsContext } from '@/context/news';
 
 export const Noticias = ({ props }) => {
     const { getAll, pageType,tickerNotices} = useContext(NewsContext)
+    const router = useRouter()
 
 
     useEffect(() => {
@@ -14,19 +16,20 @@ export const Noticias = ({ props }) => {
     },[])
 
     const ultimasNoticias = Array.isArray(tickerNotices)
-        ? tickerNotices.map(({ title, url }) => ({ title, url })).filter(item => item.title)
+        ? tickerNotices.map(({ title, url, slug }) => ({ title, url,slug })).filter(item => item.title)
         : [];
 
 
 
-    const onClick = (title, href) => {
-        const link = String(title || '')
+    const handleRedirectToNoticePage = (slug) => {
+        const link = String(slug)
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '')
             .replace(/[^a-zA-Z0-9\s-]/g, '')
             .trim()
             .replace(/\s+/g, '-')
             .toLowerCase();
+            router.push(`/noticia/${slug}`)
 
     }
     const data = false;
@@ -56,7 +59,7 @@ export const Noticias = ({ props }) => {
 
                         {ultimasNoticias.map((txt, idx) => (
                             <div className='border-r pl-5 pr-5 border-[#E3E3E3]'>
-                                <span key={`${idx}-${txt}`} className="cursor-pointer text-sm whitespace-nowrap text-white " onClick={() => { onClick(txt.title, txt.url) }}>
+                                <span key={`${idx}-${txt}`} className="cursor-pointer text-sm whitespace-nowrap text-white " onClick={() => handleRedirectToNoticePage(txt?.slug) }>
                                     {txt.title}
                                 </span>
                             </div>
