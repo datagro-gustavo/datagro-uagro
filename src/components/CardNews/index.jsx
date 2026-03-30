@@ -283,6 +283,12 @@ const CardNews = ({
 	};
 	const onClick = (slug) => {
 
+		console.log("aqui poha")
+		console.log(category)
+
+
+		return
+
 		router.push(`/${slug}`)
 	}
 
@@ -322,7 +328,7 @@ const CardNews = ({
 								</span>
 
 								<h4
-									onClick={() => onClick(it.slug)}
+									onClick={() => onClick(it.slug,it?.category)}
 
 									className="text-[15px] leading-snug font-semibold text-neutral-900
                          						group-hover:underline line-clamp-3 break-words"
@@ -588,7 +594,7 @@ const CardNews = ({
 							</div> : <></>}
 						</span>
 
-						<span onClick={() => onClick(slug)} className="cursor-pointer hover:underline">
+						<span onClick={() => onClick(slug,category)} className="cursor-pointer hover:underline">
 							{!title ? <div style={{ height: "1.1rem" }}> <Skeleton width={"80%"} height={"15px"} /></div> : <></>}
 
 							{!title ? <Skeleton width={"70%"} height={"15px"} /> : title}

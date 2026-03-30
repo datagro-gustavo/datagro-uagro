@@ -7,6 +7,6 @@ export default function robots() {
         disallow: ["/admin", "/api"], // opcional
       },
     ],
-    sitemap: "https://augro.com.br/sitemap.xml",
+    sitemap: "https://uagro.com.br/sitemap.xml",
   };
 }
