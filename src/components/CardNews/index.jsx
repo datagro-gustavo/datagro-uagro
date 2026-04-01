@@ -295,13 +295,13 @@ const CardNews = ({
 };
 
 	const onClick = (slug) => {
-
+	
 		router.push(`/${slugify(category[0]?.title)}/${slug}`)
 	}
 
 	const onClickGoToCategory = (category, categoryId) => {
 
-		router.push(`/editoria/${categoryId}/${category.toLowerCase()}`)
+		router.push(`/${slugify(category.toLowerCase())}`)
 	};
 
 	// const navigate = useNavigate()

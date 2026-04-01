@@ -28,8 +28,12 @@ export function MattersProvider({ children }) {
         try {
             setLoadMatters(true);
             const response = await api.get(`api/matters/list?lang=${langCode}`);
+
+
             if (response.status === 200 && response.data) {
+                
                 setMatters(response.data);
+
                 setLoadMatters(false);
             }
         } catch (error) {
@@ -116,7 +120,7 @@ export function MattersProvider({ children }) {
 
     useEffect(() => {
         getMatters();
-    }, [])
+    }, [matter])
 
     return (
         <MattersContext.Provider

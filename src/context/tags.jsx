@@ -61,7 +61,7 @@ export function TagsProvider({ children }) {
             let url = `api/News/list?tags=${tagId}&sort=1&quantity=8&page=${pageToLoad}&lang=pt-br&ignoredIds=${idsToIgnore}`;
 
             const response = await api.get(url);
-
+            
 
             if (response.status !== 200) {
                 setAnimatedNotices(false);
@@ -137,7 +137,9 @@ export function TagsProvider({ children }) {
                 loadMoreRowNotices,
                 setLoadingRows,
                 loadingRows,
-                data
+                data,
+                setTagId,
+                
             }}
         >
             {children}

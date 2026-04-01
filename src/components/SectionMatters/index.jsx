@@ -37,23 +37,36 @@ const SectionNoticesMatters = ({ id, slug, page }) => {
         matters
     } = useContext(MattersContext)
 
+
+    const slugify = (text) => {
+        return text
+            ?.toString()
+            .toLowerCase()
+            .normalize("NFD") // remove acentos
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/\s+/g, "-") // espaços -> hífen
+            .replace(/[^\w-]+/g, "") // remove caracteres especiais
+            .replace(/--+/g, "-") // evita múltiplos hífens
+            .trim();
+    };
+
     useEffect(() => {
         setMatter(id)
     }, [id, slug])
 
     useEffect(() => {
-        getMatters()
 
-        if (matters) {
-            const data = matters.filter(item => item?.Id == id)
-            if (data) {
-                setDataMatter(data[0])
-            }
+        const data = matters.filter(item => slugify(item?.Name) == id)
+
+        if (data) {
+            setDataMatter(data[0])
+
         }
 
-    }, [id])
+    }, [matters, id])
 
-    console.log(rowNotices)
+
+
 
     return (
         <section>
@@ -63,7 +76,7 @@ const SectionNoticesMatters = ({ id, slug, page }) => {
                 <div className='md:px-0 px-5 md:max-w-[920px]'>
 
                     <div className='flex items-center gap-5 py-4'>
-                        <div className='w-[5px] h-[79px] bg-[#98BF0E] rounded-[15px]'/>
+                        <div className='w-[5px] h-[79px] bg-[#98BF0E] rounded-[15px]' />
                         <div>
                             <h1 className="text-[1.5rem] mt-0 h-[1.31rem] font-bold text-[#000000]  ">{dataMatter?.Name}</h1>
                             <h2 className="text-[0.9rem] md:max-w-[420px] mt-6 font-medium text-[#000000]  ">{dataMatter?.DisplayNames}</h2>

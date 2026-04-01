@@ -29,13 +29,14 @@ const SectionNoticesTags = ({slug, page}) => {
         rowNotices,
         hasMoreRows,
         loadMoreRowNotices,
-        setTag,
+        setTagId,
         animatedNotices,
         data
     } = useContext(TagsContext)
 
     useEffect(() => {
-        setTag(slug)
+        setTagId(slug)
+
     }, [slug])
 
 
@@ -44,8 +45,8 @@ const SectionNoticesTags = ({slug, page}) => {
         <section>
             <NavBar />
             <BackgroundModal />
-            <div className="flex flex-row justify-center md:px-6 pb-5  ">
-                <div className='md:px-0 px-5'>
+            <div className=" flex flex-col flex md:flex-row md:px-20 md:justify-center  ">
+                <div className='md:px-0 px-5 md:max-w-[920px]'>
                     <h1 className="text-[1.3rem] mt-6 font-bold text-[#319e96] uppercase ">{data?.title}</h1>
 
                     {animatedNotices ?<Skeleton/> :<></>}
@@ -53,7 +54,7 @@ const SectionNoticesTags = ({slug, page}) => {
 
                     {rowNotices?.map(item => {
                         return (
-                            <CardMoreNotice title={item?.title} publishDate={item?.publishDate} description={item?.description} image={item?.imageUrl} noticeId={item?.id} slug={item?.slug} />
+                            <CardMoreNotice title={item?.title} publishDate={item?.publishDate} matters={item?.matters} markets={item?.markets} description={item?.description} image={item?.imageUrl} noticeId={item?.id} slug={item?.slug} />
                         )
                     })}
 

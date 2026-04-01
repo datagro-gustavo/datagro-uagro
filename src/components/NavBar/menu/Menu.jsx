@@ -19,7 +19,7 @@ export const Menu = ({ props, scrolled }) => {
 	const [id, setId] = useState()
 	const router = useRouter()
 	const { setTheme, theme } = useContext(ThemeContext)
-	const {matters, loadMatters} = useContext(MattersContext)
+	const { matters, loadMatters } = useContext(MattersContext)
 	const editorias = getEditoriasConfig();
 	const breakPoint = useBreakpoint()
 	const data = false;
@@ -68,15 +68,26 @@ export const Menu = ({ props, scrolled }) => {
 		}
 	]
 
+	const slugify = (text) => {
+		return text
+			?.toString()
+			.toLowerCase()
+			.normalize("NFD") // remove acentos
+			.replace(/[\u0300-\u036f]/g, "")
+			.replace(/\s+/g, "-") // espaços -> hífen
+			.replace(/[^\w-]+/g, "") // remove caracteres especiais
+			.replace(/--+/g, "-") // evita múltiplos hífens
+			.trim();
+	};
 
 	const handleRedirectToCulturePage = (item) => {
-		router.push(`/editoria/${item.Id}/${item.Name.toLowerCase()}`)
+		router.push(`/${slugify(item.Name.toLowerCase())}`)
 	}
 
 
 	if (loadMatters) {
 		return (
-			<Skeleton count={1} width={'100%'}  height={20}  className='mb-4' />
+			<Skeleton count={1} width={'100%'} height={20} className='mb-4' />
 		)
 	}
 
@@ -86,7 +97,7 @@ export const Menu = ({ props, scrolled }) => {
 				<SearchBox />
 				<div className="relative hidden md:flex justify-center gap-5 items-center py-0">
 
-					{matters.slice(0,7).map((item) => (
+					{matters.slice(0, 7).map((item) => (
 
 						<div key={item.id}
 							style={{
@@ -139,7 +150,7 @@ export const Menu = ({ props, scrolled }) => {
 						</div>
 					))}
 				</div>
-		
+
 			</nav>
 
 

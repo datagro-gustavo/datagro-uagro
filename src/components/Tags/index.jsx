@@ -8,8 +8,21 @@ const Tags = ({ notice }) => {
 
     const router = useRouter()
 
+
+    const slugify = (text) => {
+        return text
+            ?.toString()
+            .toLowerCase()
+            .normalize("NFD") // remove acentos
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/\s+/g, "-") // espaços -> hífen
+            .replace(/[^\w-]+/g, "") // remove caracteres especiais
+            .replace(/--+/g, "-") // evita múltiplos hífens
+            .trim();
+    };
+
     const handleNavigateToCulturePage = (item) => {
-        router.push(`/assunto/${item?.slug}`)
+        router.push(`/assunto/${slugify(item?.name)}`)
     }
 
 

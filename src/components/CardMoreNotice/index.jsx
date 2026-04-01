@@ -65,7 +65,7 @@ const CardMoreNotice = ({ title, description, image, noticeId, slug, matters, pu
     .replace(/[^\w-]+/g, "") // remove caracteres especiais
     .replace(/--+/g, "-") // evita múltiplos hífens
     .trim();
-};
+    };
     const handleRedirectToNewsPage = (slug) => {
 
 
