@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }) => {
 
 
     
-//     console.log("AUTH CONTEXT - COOKIES:", cookies.login);
 
 //     useEffect(() => {
 //         // login();

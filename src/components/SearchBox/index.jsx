@@ -133,7 +133,6 @@ const Content = styled.div`
 //         }
 //     };
 
-//     console.log(currentSrc)
 
 
 //     if (!currentSrc || error) {
@@ -159,6 +158,20 @@ const Content = styled.div`
 
 export const SearchBox = () => {
 
+  	const slugify = (text) => {
+  return text
+    ?.toString()
+    .toLowerCase()
+    .normalize("NFD") // remove acentos
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-") // espaços -> hífen
+    .replace(/[^\w-]+/g, "") // remove caracteres especiais
+    .replace(/--+/g, "-") // evita múltiplos hífens
+    .trim();
+    };
+
+
+
   const navigate = useRouter()
 
   const { search, setSearch, get, data } = useContext(SearchContext)
@@ -167,12 +180,13 @@ export const SearchBox = () => {
   const route = useRouter()
   useClickOutside(ref, close, search);
 
-  const handleRedirectToNewsPage = (slug) => {
-    route.push(`/noticia/${slug}`)
+  const handleRedirectToNewsPage = (category,slug) => {
+
+    route.push(`/${slugify(category)}/${slug}`)
   }
 
   const handleRedirectToCulturePage = (category) => {
-    route.push(`/assunto/${category}`)
+    route.push(`/${slugify(category)}`)
 
   }
 
@@ -201,17 +215,19 @@ export const SearchBox = () => {
                     className="relative pl-2 pr-5 flex items-center justify-between mb-3.5"
                   >
                     <div className="w-[99%] border-b pb-2 border-[#000000] mt-5 flex flex-col items-baseline leading-tight">
-                      <p id="textPrimary" className="font-metropolis hover:underline cursor-pointer" onClick={() => handleRedirectToNewsPage(item?.slug)}>
+                      <p id="textPrimary" className="font-metropolis hover:underline cursor-pointer" onClick={() => handleRedirectToNewsPage(item.matters[0]?.title,item?.slug)}>
                         {item?.title}
                       </p>
 
                       <div
-                        onClick={() => handleRedirectToCulturePage(item?.matters[0]?.id, item?.matters[0]?.title)}
+                        onClick={() => handleRedirectToCulturePage(item?.matters[0]?.title)}
                         className={`mt-2 rounded-md px-1 py-1 hover:opacity-80 transition-opacity cursor-pointer`}
-                        style={{ backgroundColor: item?.markets[0]?.color }}
+                        style={{ backgroundColor: item?.matters[0]?.color }}
                       >
-                        <p id="textSecondary" style={{ color: "white" }} className="text-md font-bold text-black">
-                          {item?.markets ? item.markets[0]?.title : ""}
+                        <p id="textSecondary" style={{ color: "black" }} className="text-md font-bold text-black">
+                          {item.matters[0]?.title}
+                        
+                        
                         </p>
                       </div>
 
@@ -224,7 +240,7 @@ export const SearchBox = () => {
                       width={90} height={90}
                       src={item?.imageUrl}
                       alt={item?.title}
-                      onClick={() => handleRedirectToNewsPage(item?.title, item?.url, item?.id)}
+                      onClick={() => handleRedirectToNewsPage(item.matters[0]?.title,item?.slug)}
                       className="absolute right-7 w-[50px] h-[50px] object-cover hover:opacity-80 transition-opacity cursor-pointer"
                     />
                   </div>

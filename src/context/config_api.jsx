@@ -28,7 +28,6 @@ export function ConfigProvider({ children }) {
         const linkNoticiasApi = data?.urls?.find((url) => url.type === "noticias")?.link;
 
         
-        console.log(linkNoticiasApi)
 
         configureApi(linkNoticiasApi);
 

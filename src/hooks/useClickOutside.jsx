@@ -7,7 +7,6 @@ export const useClickOutside = (ref, callback, enabled = false) => {
 
   useEffect(() => {
     if (!enabled) return;
-    // console.log(ref)
     function handleClick() {
       if (ref.current && !ref.current.contains(event.target)) {
         callback();

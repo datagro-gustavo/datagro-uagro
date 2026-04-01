@@ -26,7 +26,6 @@ export const VideosProvider = ({ children }) => {
     useEffect(() => {
         (async () => { await getVideos() })();
     }, [langCode])
-    // console.log(videos)
     const value = {
         videos,
         changeLanguage

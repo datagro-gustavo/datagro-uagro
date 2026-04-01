@@ -48,10 +48,8 @@ export const SafeImage = ({ src, alt, className, isSectionNews = false }) => {
 
   useEffect(() => {
 
-    console.log(src)
     if (!src) return;
     const baseUrl = transformUrl(src).replace(/\/wp-content\//g, "/");
-    console.log("Transformed URL:", baseUrl);
     if (!baseUrl) return;
 
     const noExtension = baseUrl.replace(/\.(jpg|jpeg|png)$/i, "");

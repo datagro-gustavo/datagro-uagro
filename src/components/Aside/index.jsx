@@ -167,7 +167,6 @@ export const Aside = () => {
             return toast.error("Informe seu cargo", { autoClose: 1500 })
         }
 
-        console.log({ name, mail, company, post })
     }
 
 

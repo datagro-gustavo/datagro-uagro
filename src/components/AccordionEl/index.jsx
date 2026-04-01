@@ -75,8 +75,21 @@ export const AccordionEl = () => {
   const {matters} = useContext(MattersContext)
   const router = useRouter()
 
+      
+	const slugify = (text) => {
+  return text
+    ?.toString()
+    .toLowerCase()
+    .normalize("NFD") // remove acentos
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-") // espaços -> hífen
+    .replace(/[^\w-]+/g, "") // remove caracteres especiais
+    .replace(/--+/g, "-") // evita múltiplos hífens
+    .trim();
+    };
+
   const onClickGoToCategory = (item) => {
-    router.push(`/editoria/${item?.Id}/${item?.Name.toLowerCase()}`)
+    router.push(`${slugify(item?.Name.toLowerCase())}`)
   };
 
   const toggleAccordion = (index) => {

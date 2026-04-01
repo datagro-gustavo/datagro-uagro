@@ -9,7 +9,6 @@ import { Carrousel } from '../Carrousel';
 
 export const TvDatagro = ({ props }) => {
   const { videos } = useContext(VideosContext);
-  // console.log(videos)
   /* ISOLATE STATE INPUTS */
 
   const [slides, setSlides] = useState([]);

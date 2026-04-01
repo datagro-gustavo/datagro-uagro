@@ -39,7 +39,6 @@ export const Noticias = ({ props, relevante = true, destaque = true, cultura = f
 
 	useEffect(() => {
 		getHighLights()
-		// console.log(notices)
 	}, [])
 
 	const textCards = [

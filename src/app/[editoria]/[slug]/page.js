@@ -13,8 +13,6 @@ async function getNewsBySlug(slug) {
 export async function generateMetadata({ params }) {
   const { slug,editoria } = await params;
 
-    console.log("aquiiii")
-  console.log(await params)
 
   const data = await getNewsBySlug(slug);
   const canonical = `https://www.uagro.com.br/${editoria}/${slug}`;

@@ -93,7 +93,6 @@ const CardWrapper = styled.div`
 //         }
 //     };
 
-//     console.log(currentSrc)
 
 
 //     if (!currentSrc || error) {
