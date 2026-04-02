@@ -11,7 +11,7 @@ export function MattersProvider({ children }) {
 
     const [renderingNotices, setRenderingNotices] = useState([]);
     const [rowNotices, setRowNotices] = useState([]);
-    const [rowPage, setRowPage] = useState(1);
+    const [rowPage, setRowPage] = useState(0);
     const [hasMoreRows, setHasMoreRows] = useState(true);
     const [animatedNotices, setAnimatedNotices] = useState(false);
     const [matters, setMatters] = useState([])
@@ -56,7 +56,7 @@ export function MattersProvider({ children }) {
         );
     };
 
-    const getRowNoticesPage = async (pageToLoad = 1, ignored = []) => {
+    const getRowNoticesPage = async (pageToLoad = 0, ignored = []) => {
         try {
             const idsToIgnore = ignored.length ? ignored : renderingNotices;
             const ignoredParam = idsToIgnore.length ? `&ignoredIds=${idsToIgnore.join(",")}` : "";
@@ -66,6 +66,7 @@ export function MattersProvider({ children }) {
             const url = `api/News/list?matters=${matter}&quantity=8&page=${pageToLoad}&lang=pt-br${ignoredParam}`;
             const response = await api.get(url);
 
+            
             if (response.status !== 200) {
                 setAnimatedNotices(false);
                 return { items: [], hasMore: false };
@@ -74,7 +75,7 @@ export function MattersProvider({ children }) {
             const data = response.data;
             const items = Array.isArray(data.items) ? data.items : data;
 
-            setRowNotices((prev) => (pageToLoad === 1 ? items : [...prev, ...items]).slice(0, MAX_ROW_ITEMS));
+            setRowNotices((prev) => (pageToLoad === 0 ? items : [...prev, ...items]).slice(0, MAX_ROW_ITEMS));
 
             addRenderedIds(items);
             setRowPage(pageToLoad);
@@ -115,7 +116,7 @@ export function MattersProvider({ children }) {
     useEffect(() => {
         if (!matter) return;
         resetRow();
-        getRowNoticesPage(1, []);
+        getRowNoticesPage(0, []);
     }, [matter]);
 
     useEffect(() => {
