@@ -69,7 +69,7 @@ export const Footer = () => {
         )
     }
     return (
-        <footer className=" font-metropolis relative bg-[#319e96] text-gray-300 py-10 w-full h-[auto] ">
+        <footer className=" font-metropolis relative bg-[#7fb954] text-gray-300 py-10 w-full h-[auto] ">
             <div className="max-w-7xl mx-auto px-6 grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center sm:text-left justify-items-center sm:justify-items-start">
 
                 <div>

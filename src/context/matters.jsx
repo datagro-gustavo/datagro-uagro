@@ -28,13 +28,16 @@ export function MattersProvider({ children }) {
         try {
             setLoadMatters(true);
             const response = await api.get(`api/matters/list?lang=${langCode}`);
-
+            
 
             if (response.status === 200 && response.data) {
                 
                 setMatters(response.data);
-
                 setLoadMatters(false);
+                return 
+            }else{
+                window.location.href="/"
+                return
             }
         } catch (error) {
             console.error("Error fetching matters:", error);

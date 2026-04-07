@@ -58,10 +58,14 @@ const SectionNoticesMatters = ({ id, slug, page }) => {
 
         const data = matters.filter(item => slugify(item?.Name) == id)
 
-        if (data) {
-            setDataMatter(data[0])
-
+        if (data.length > 0) {
+            setDataMatter(data[0]);
+        } else {
+            window.location.href = "/";
+            return;
         }
+
+
 
     }, [matters, id])
 

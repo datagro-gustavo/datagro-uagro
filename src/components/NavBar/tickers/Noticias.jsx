@@ -59,7 +59,7 @@ export const Noticias = ({ props }) => {
 
     return (
         <div>
-            <div className={`${pageType !== "home" ? '' : ''} sm:flex bg-[#319e96] w-full h-10`}>
+            <div className={`${pageType !== "home" ? '' : ''} sm:flex bg-[#7fb954] w-full h-10`}>
                 <div className={`flex w-full `}>
                     <div className='flex w-36 items-center '>
                         <span className=' text-white font-regular text-sm ml-4'> Últimas notícias </span>

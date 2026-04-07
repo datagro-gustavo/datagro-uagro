@@ -257,7 +257,7 @@ export const Aside = () => {
                             <input type="email" onChange={(e) => setMail(e.target.value)} placeholder="Email" className="px-3 py-1 border border-gray-300 rounded-md" />
                             <input type="text" onChange={(e) => setCompany(e.target.value)} placeholder="Empresa" className="px-3 py-1 border border-gray-300 rounded-md" />
                             <input type="text" onChange={(e) => setPost(e.target.value)} placeholder="Cargo" className="px-3 py-1 border border-gray-300 rounded-md" />
-                            <button type="submit" className="cursor-pointer mt-2.5 font-metropolis  text-white bg-[#319e96] p-2 rounded-md w-full text-sm">Cadastrar</button>
+                            <button type="submit" className="cursor-pointer mt-2.5 font-metropolis  text-white bg-[#7fb954] p-2 rounded-md w-full text-sm">Cadastrar</button>
 
                         </form>
                     </div>

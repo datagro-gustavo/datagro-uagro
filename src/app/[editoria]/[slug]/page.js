@@ -15,12 +15,14 @@ export async function generateMetadata({ params }) {
 
 
   const data = await getNewsBySlug(slug);
+  console.log(data?.yoast)
   const canonical = `https://www.uagro.com.br/${editoria}/${slug}`;
 
   return {
-    title: data?.title ?? "Universo Agro",
-    description: data?.description,
+    title: data?.yoast?.title,
+    description: data?.yoast?.description,
     alternates: { canonical },
+    keywords:data?.yoast?.focusKeyword,
     openGraph: {
       title: data?.title,
       description: data?.description,
