@@ -34,7 +34,7 @@ const Tags = ({ notice }) => {
             {
                 notice?.tags?.map(item => {
                     return (
-                        <div onClick={() => handleNavigateToCulturePage(item)} className="mt-3 md:mt-0 cursor-pointer ml-2 flex items-center justify-center rounded-md  px-3 w-[auto] h-[30px] text-white bg-[#319e96]">
+                        <div onClick={() => handleNavigateToCulturePage(item)} className="mt-3 md:mt-0 cursor-pointer ml-2 flex items-center justify-center rounded-md  px-3 w-[auto] h-[30px] text-white bg-[#7fb954]">
                             {item?.name}
                         </div>
                     )
