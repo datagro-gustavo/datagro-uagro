@@ -26,7 +26,7 @@ const lora = Lora({
 
 
 export const metadata = {
-    metadataBase: new URL("https://www.uagro.com.br"),
+    metadataBase: new URL("https://uagro.com.br"),
 
   title: "Uagro | Notícias de Agricultura, Agronegócio e Mercado Rural",
   description:
