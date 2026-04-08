@@ -26,6 +26,8 @@ const lora = Lora({
 
 
 export const metadata = {
+    metadataBase: new URL("https://www.uagro.com.br"),
+
   title: "Uagro | Notícias de Agricultura, Agronegócio e Mercado Rural",
   description:
     "Uagro é um portal de notícias sobre agricultura, agronegócio, mercado rural, clima, tecnologia no campo e economia agrícola no Brasil.",
@@ -64,9 +66,11 @@ export const metadata = {
   },
 
   alternates: {
-    canonical: "https://www.uagro.com.br",
+    canonical: "/",
   },
 };
+
+
 
 export default function RootLayout({ children }) {
   return (

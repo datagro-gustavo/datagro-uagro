@@ -58,9 +58,12 @@ export function TagsProvider({ children }) {
 
             setAnimatedNotices(true);
 
-            let url = `api/News/list?tags=${tagId}&sort=1&quantity=8&page=${pageToLoad}&lang=pt-br&ignoredIds=${idsToIgnore}`;
+            let url = `api/News/list?tags=${tagId}&quantity=8&page=${pageToLoad}&lang=pt-br&ignoredIds=${idsToIgnore}`;
 
             const response = await api.get(url);
+
+            console.log("aqui poha caralho")
+            console.log(response.data)
             
 
             if (response.status !== 200) {
@@ -82,7 +85,7 @@ export function TagsProvider({ children }) {
             const finalHasMore = hasNextFromApi && !willReachLimit;
 
             setRowNotices((prev) => {
-                const merged = pageToLoad === 1 ? items : [...prev, ...items];
+                const merged = pageToLoad === 0 ? items : [...prev, ...items];
                 return merged.slice(0, MAX_ROW_ITEMS);
             });
 

@@ -11,21 +11,22 @@ async function getNewsBySlug(slug) {
 }
 
 export async function generateMetadata({ params }) {
-  const { slug,editoria } = await params;
-
+  const { slug, editoria } = await params;
 
   const data = await getNewsBySlug(slug);
-  console.log(data?.yoast)
-  const canonical = `https://www.uagro.com.br/${editoria}/${slug}`;
+  const canonical = `/${editoria}/${slug}`;
 
   return {
-    title: data?.yoast?.title,
-    description: data?.yoast?.description,
+    title: data?.seo?.title || data?.title || "",
+    description: data?.seo?.description || data?.description || "",
     alternates: { canonical },
-    keywords:data?.yoast?.focusKeyword,
+
+    // pode ser string direto
+    keywords: data?.seo?.keywords || "",
+
     openGraph: {
-      title: data?.title,
-      description: data?.description,
+      title: data?.seo?.title || data?.title || "",
+      description: data?.seo?.description || data?.description || "",
       url: canonical,
       images: data?.imageUrl ? [{ url: data.imageUrl }] : [],
     },
@@ -34,8 +35,6 @@ export async function generateMetadata({ params }) {
 
 export default async function Slug({ params }) {
   const { slug,editoria } = await params;
-
-
 
   const data = await getNewsBySlug(slug);
 
