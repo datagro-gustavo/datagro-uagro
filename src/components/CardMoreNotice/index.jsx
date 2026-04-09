@@ -75,7 +75,7 @@ const CardMoreNotice = ({ title, description, image, noticeId, slug, matters, pu
         router.push(`/${slugify(category)}/${slug}`)
     }
     const handleRedirectToEditoriaPage = (id,name) => {
-        router.push(`/editoria/${id}/${name}`)
+        router.push(`/${slugify(name)}`)
     }
 
     return (
