@@ -61,11 +61,7 @@ export function TagsProvider({ children }) {
             let url = `api/News/list?tags=${tagId}&quantity=8&page=${pageToLoad}&lang=pt-br&ignoredIds=${idsToIgnore}`;
 
             const response = await api.get(url);
-
-            console.log("aqui poha caralho")
-            console.log(response.data)
             
-
             if (response.status !== 200) {
                 setAnimatedNotices(false);
                 return { items: [], hasMore: false };

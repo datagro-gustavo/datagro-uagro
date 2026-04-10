@@ -56,8 +56,6 @@ export default function Landing() {
             <NavBar />
             <Sidebar />
             <BackgroundModal />
-
-
             <Clean scrolled={scrolled} />
             <section className=" px-6  md:px-12">
                 <HeroSection layout={"hero"} px={'px-6'} />

@@ -324,8 +324,9 @@ const CardNews = ({
 									alt={it.title || ""}
 									className="block w-full h-full object-cover :opacity-90 transition"
 								/>
-
 							</div>
+
+
 
 							{/* texto: permite encolher e quebra correta */}
 							<div className="min-w-0">
@@ -557,7 +558,7 @@ const CardNews = ({
 							<React.Fragment key={cat.id}>
 								<span
 									onClick={() => onClickGoToCategory(cat.title, cat.id)}
-									className="cursor-pointer text-[#98bf0e] text-xs font-semibold uppercase hover:underline"
+									className="cursor-pointer text-[#98bf0e] text-xs h-[0.8rem] font-semibold uppercase hover:underline"
 								>
 									{cat.title}
 								</span>

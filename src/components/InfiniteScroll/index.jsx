@@ -74,18 +74,21 @@ const Notices = ({page}) => {
   const CHUNK_SIZE = 8;
   const chunks = [];
 
+
   for (let i = 0; i < rowNotices.length; i += CHUNK_SIZE) {
     chunks.push(rowNotices.slice(i, i + CHUNK_SIZE));
   }
+
 
   // const handleClickButton = () => {
   //   if(count == 2){
   //     router.push(`/notices/${12}`)
   //   }
   //   setCount(count + 1)
-
   // }
 
+
+  
   useEffect(() => {
     setPageType(page)
   },[page])
@@ -96,6 +99,7 @@ const Notices = ({page}) => {
     <section >
       <div className="flex flex-row justify-items-start px-6 md:px-12 pb-5 xl:max-w-7xl 2xl:max-w-412.5 mx-auto py-8">
         <h2 className="text-2xl md:text-3xl font-medium mb-2 ">Mais Notícias</h2>
+
       </div>
       {chunks.map((group, index) => (
         <div key={index} style={{ marginBottom: "40px" }}>

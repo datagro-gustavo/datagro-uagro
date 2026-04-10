@@ -1,4 +1,5 @@
 import "./globals.css";
+import Script from "next/script";
 import { ThemeProvider } from "@/context/theme";
 import { InstagramProvider } from "@/context/instagram";
 import { AnalysisProvider } from "@/context/analysis";
@@ -26,7 +27,7 @@ const lora = Lora({
 
 
 export const metadata = {
-    metadataBase: new URL("https://uagro.com.br"),
+  metadataBase: new URL("https://uagro.com.br"),
 
   title: "Uagro | Notícias de Agricultura, Agronegócio e Mercado Rural",
   description:
@@ -80,37 +81,50 @@ export default function RootLayout({ children }) {
       >
         <ConfigProvider>
           <MattersProvider>
-          <TagsProvider>
-            <NewsProvider>
-              <ThemeProvider>
-                <VideosProvider>
-                  <PricesProvider>
-                    <AuthProvider>
-                      <SearchProvider>
-                        <ColumnProvider>
-                          <AnalysisProvider>
-                            <ExchangeProvider>
-                              <QuadrosProvider>
-                                <ModalProvider>
-                                  <SidebarProvider>
-                                    <InstagramProvider>
-                                      {children}
-                                    </InstagramProvider>
-                                  </SidebarProvider>
-                                </ModalProvider>
-                              </QuadrosProvider>
-                            </ExchangeProvider>
-                          </AnalysisProvider>
-                        </ColumnProvider>
-                      </SearchProvider>
-                    </AuthProvider>
-                  </PricesProvider>
-                </VideosProvider>
-              </ThemeProvider>
-            </NewsProvider>
-          </TagsProvider>
+            <TagsProvider>
+              <NewsProvider>
+                <ThemeProvider>
+                  <VideosProvider>
+                    <PricesProvider>
+                      <AuthProvider>
+                        <SearchProvider>
+                          <ColumnProvider>
+                            <AnalysisProvider>
+                              <ExchangeProvider>
+                                <QuadrosProvider>
+                                  <ModalProvider>
+                                    <SidebarProvider>
+                                      <InstagramProvider>
+                                        {children}
+                                      </InstagramProvider>
+                                    </SidebarProvider>
+                                  </ModalProvider>
+                                </QuadrosProvider>
+                              </ExchangeProvider>
+                            </AnalysisProvider>
+                          </ColumnProvider>
+                        </SearchProvider>
+                      </AuthProvider>
+                    </PricesProvider>
+                  </VideosProvider>
+                </ThemeProvider>
+              </NewsProvider>
+            </TagsProvider>
           </MattersProvider>
         </ConfigProvider>
+
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-PEXZ4FB1CT"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-PEXZ4FB1CT');
+          `}
+        </Script>
       </body>
     </html>
   );

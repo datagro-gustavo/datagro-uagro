@@ -60,11 +60,7 @@ const SectionNoticesMatters = ({ id, slug, page }) => {
 
         if (data.length > 0) {
             setDataMatter(data[0]);
-        } else {
-            window.location.href = "/";
-            return;
-        }
-
+        } 
 
 
     }, [matters, id])

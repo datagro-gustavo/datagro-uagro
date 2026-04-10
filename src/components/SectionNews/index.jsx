@@ -266,15 +266,23 @@ export const SectionNews = ({ id, slug }) => {
 
     };
 
-    const onClickGoToCategory = (id, item) => {
-        const slug = item
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, "-")
-            .replace(/^-+|-+$/g, "");
+          
+	const slugify = (text) => {
+  return text
+    ?.toString()
+    .toLowerCase()
+    .normalize("NFD") // remove acentos
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-") // espaços -> hífen
+    .replace(/[^\w-]+/g, "") // remove caracteres especiais
+    .replace(/--+/g, "-") // evita múltiplos hífens
+    .trim();
+    };
 
-        window.location.href = `/notices/${id}/${slug}`
+
+    const onClickGoToCategory = (item) => {
+ 
+        window.location.href = `/${slugify(item)}`
     };
 
     const textColorPrimary = theme ? "#74776f" : "text-white";
@@ -405,9 +413,9 @@ export const SectionNews = ({ id, slug }) => {
 
                             } */}
 
-                            {/* <p className={`font-metropolis text-sm font-regular cursor-pointer text-[#98BF0E] hover:underline mb-2 text-[${textColorPrimary}]`} onClick={() => { onClickGoToCategory(notice?.markets?.[0].id, notice?.markets?.[0].title) }}>
-                                {animated ? <Skeleton width={"10%"} /> : notice?.markets?.[0].title}
-                            </p> */}
+                            <p className={`font-metropolis text-md font-regular cursor-pointer text-[#98BF0E] hover:underline mb-3 text-[${textColorPrimary}]`} onClick={() => { onClickGoToCategory(notice?.matters?.[0].title) }}>
+                                {animated ? <Skeleton width={"10%"} /> : notice?.matters?.[0].title}
+                            </p> 
                             <p className={`font-metropolis mb-2 font-bold text-2xl text-[${textColorSecondary}]`}>
 
                                 {animated ? <Skeleton width={"60%"} /> : notice?.title}

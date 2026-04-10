@@ -11,6 +11,7 @@ export function ConfigProvider({ children }) {
     const [config, setConfig] = useState({});
     const URL = "https://devx.datagro.com/uagro/";
     const [loading, setLoading] = useState(false);
+   
 
     const get = async () => {
 

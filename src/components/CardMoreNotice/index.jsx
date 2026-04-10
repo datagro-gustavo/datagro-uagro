@@ -88,7 +88,17 @@ const CardMoreNotice = ({ title, description, image, noticeId, slug, matters, pu
     />
 
     <div className="md:ml-4 px-2 w-full">
-        
+             {matters?.map(item => {
+                return (
+                    <p
+                        key={item?.id}
+                        onClick={() => handleRedirectToEditoriaPage(item?.id, item?.title)}
+                        className="hover:underline font-metropolis text-[#98BF0E] text-[0.7rem] mt-1 mb-2 font-bold uppercase"
+                    >
+                        {item?.title}
+                    </p>
+                )
+            })}
         <p
             onClick={() => handleRedirectToNewsPage(slug)}
             className="hover:underline font-metropolis mt-3 text-[#171717] text-[1.1rem] md:mt-0 mb-2 font-bold line-clamp-2"
@@ -104,20 +114,6 @@ const CardMoreNotice = ({ title, description, image, noticeId, slug, matters, pu
         </p>
 
         <div className="h-[1px] bg-[#B5B4B4] mt-2" />
-
-        <div className="flex items-center gap-3 flex-wrap">
-            {matters?.map(item => {
-                return (
-                    <p
-                        key={item?.id}
-                        onClick={() => handleRedirectToEditoriaPage(item?.id, item?.title)}
-                        className="hover:underline font-metropolis text-[#98BF0E] text-[0.7rem] mt-3 font-bold uppercase"
-                    >
-                        {item?.title}
-                    </p>
-                )
-            })}
-        </div>
 
         <div className="flex items-center gap-3 mt-3 flex-wrap">
             <p className="font-metropolis text-[#a0a0a0] font-medium text-[0.9rem]">

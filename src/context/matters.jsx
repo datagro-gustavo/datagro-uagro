@@ -29,9 +29,7 @@ export function MattersProvider({ children }) {
             setLoadMatters(true);
             const response = await api.get(`api/matters/list?lang=${langCode}`);
             
-
             if (response.status === 200 && response.data) {
-                
                 setMatters(response.data);
                 setLoadMatters(false);
                 return 
@@ -68,6 +66,12 @@ export function MattersProvider({ children }) {
 
             const url = `api/News/list?matters=${matter}&quantity=8&page=${pageToLoad}&lang=pt-br${ignoredParam}`;
             const response = await api.get(url);
+
+
+            if(response.data == "" ){
+                return window.location.href="/"
+            }
+
 
             
             if (response.status !== 200) {
