@@ -126,7 +126,7 @@ const CardMoreNotice = ({ title, description, image, noticeId, slug, matters, pu
             </span>
         </div>
 
-        <Image src={arrowRight}  onClick={() => handleRedirectToEditoriaPage(item?.id, item?.title)} className="absolute right-5 bottom-[30px]" />
+        <Image src={arrowRight}  onClick={() => handleRedirectToEditoriaPage(item?.id, item?.title)} className="absolute right-5 bottom-[10px]" />
     </div>
 </div>
     )
