@@ -118,16 +118,17 @@ const BannerCarouselImage = styled.img`
   object-fit: cover;
 `;
 
-export const Aside = () => {
+export const EditoriaAside = ({ matter }) => {
 
+ const { get, getBannerPositionInfo } = useContext(BannersContext);
 
-    const { get, getBannerPositionInfo } = useContext(BannersContext);
+const bannerPosition = getBannerPositionInfo(6, "matters", matter);
 
-    useEffect(() => {
-        get(3);
-    }, [get]);
+useEffect(() => {
+    if (!matter) return;
+    get(6, "matters", matter);
+}, [matter, get]);
 
-    const bannerPosition = getBannerPositionInfo(3);
 
     const router = useRouter()
 

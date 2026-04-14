@@ -121,7 +121,7 @@ const CardMoreNotice = ({ title, description, image, noticeId, slug, matters, pu
             </p>
 
             <span className="flex items-center gap-1 font-metropolis text-[#a0a0a0] font-medium text-[0.9rem]">
-                <Image src={clockIcon} className="w-[13px] mt-[0.2rem]" />
+                <Image src={clockIcon} className="w-[13px] mt-[0rem]" />
                 {getTimeAgo(publishDate)}
             </span>
         </div>

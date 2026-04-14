@@ -5,6 +5,9 @@ import { getSessionConfig } from "../../utils/getSessionConfig";
 import CardNews from "../CardNews";
 import styled from "styled-components";
 import { NewsContext } from "../../context/news";
+import { BannersContext } from "@/context/banners";
+
+
 
 const Clean = styled.div`
   height:${props => props.scrolled ? "13.2rem" : "0"};
@@ -19,6 +22,15 @@ const TechSectionTemp = ({ mx, px, name, home = 0 }) => {
 
   const isHome = location.pathname === "/"
   const isNews = location.pathname.startsWith("/news");
+
+  const { get, getBannerPositionInfo } = useContext(BannersContext);
+
+  useEffect(() => {
+    get(2);
+  }, [get]);
+
+  const bannerPosition = getBannerPositionInfo(2);
+
 
   const config = getSessionConfig("tech");
   const { byCategory, setCategory, category, notice, mostRead } = useContext(NewsContext)
@@ -76,6 +88,19 @@ const TechSectionTemp = ({ mx, px, name, home = 0 }) => {
           <CardNews key={card.id} {...card} />
         ))}
       </div>
+
+
+      {bannerPosition?.banners?.map((item) => (
+        <img
+          key={item.id}
+          src={item.imageUrl}
+          alt={item.name}
+          className="mt-9"
+          style={{ width: "100%", maxWidth: "1600px" }}
+        />
+      ))}
+
+
     </section>
   );
 };

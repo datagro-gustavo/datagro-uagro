@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 /* OUTHER COMPONENTS */
 import styled from "styled-components";
@@ -31,6 +31,7 @@ import InstagramStories from "@/components/InstagramStories";
 import BackgroundInstagram from "@/components/BackgroundInstagram";
 import RowNotice from "@/components/RowNotice";
 import Clean from "@/components/Clean";
+import { BannersContext } from "@/context/banners";
 
 
 /* STYLED */
@@ -57,13 +58,15 @@ export default function Landing() {
             <Sidebar />
             <BackgroundModal />
             <Clean scrolled={scrolled} />
+
+
             <section className=" px-6  md:px-12">
+
                 <HeroSection layout={"hero"} px={'px-6'} />
                 <div className="flex xl:max-w-[1280px] 2xl:max-w-[1650px] mx-auto md:px-6 py-7">
                     <div className="w-full" >
                         <MaisLidasSection name={"Mais lidas"} />
                         <TechSectionTemp />
-                        <Image src={banner} width={900} className="mt-6" height={900} />
                     </div>
                     <Border className="hidden md:flex border border-r-0 ml-5 mr-5 border-slate-500 h-[auto]" />
                     <Aside />

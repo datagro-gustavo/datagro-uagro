@@ -7,7 +7,7 @@ export const TagsContext = createContext();
 
 export function TagsProvider({ children }) {
 
-    const [data,setData] = useState()
+    const [data, setData] = useState()
 
     const [renderingNotices, setRenderingNotices] = useState([]);
     const [rowNotices, setRowNotices] = useState([]);
@@ -17,7 +17,9 @@ export function TagsProvider({ children }) {
     const [tagId, setTagId] = useState(null)
     const [tagName, setTagName] = useState(null)
     const [tag, setTag] = useState()
+    const [nameTag, setNameTag] = useState()
     const [loadingRows, setLoadingRows] = useState(false);
+    const [tagSlug, setTagSlug] = useState(null)
 
     const MAX_ROW_ITEMS = 40;
 
@@ -41,11 +43,15 @@ export function TagsProvider({ children }) {
     const getTagIdBySlug = async (slug) => {
         try {
             const response = await api.get(`api/tags?slug=${slug}`);
-            if (response.status === 200 && response.data) 
-                {
-                setTagName(response.data[0].title);
+            if (response.data) {
+
+
+                setTagName(response.data[0].name);
+                setNameTag(response.data[0].name);
                 setTagId(response.data[0].id);
-                }
+
+
+            }
         } catch (error) {
             console.error("Error fetching tag ID:", error);
         }
@@ -58,10 +64,11 @@ export function TagsProvider({ children }) {
 
             setAnimatedNotices(true);
 
+
             let url = `api/News/list?tags=${tagId}&quantity=8&page=${pageToLoad}&lang=pt-br&ignoredIds=${idsToIgnore}`;
 
             const response = await api.get(url);
-            
+
             if (response.status !== 200) {
                 setAnimatedNotices(false);
                 return { items: [], hasMore: false };
@@ -114,14 +121,16 @@ export function TagsProvider({ children }) {
     };
 
     useEffect(() => {
-        getRowNoticesPage()
-    },[tagId])
+        if (tagId) {
+            getRowNoticesPage()
+        }
+    }, [tagId])
 
     useEffect(() => {
-        if (tag) {
-            getTagIdBySlug(tag);
+        if (tagSlug) {
+            getTagIdBySlug(tagSlug);
         }
-    }, [tag])
+    }, [tagSlug])
 
     return (
         <TagsContext.Provider
@@ -138,7 +147,10 @@ export function TagsProvider({ children }) {
                 loadingRows,
                 data,
                 setTagId,
-                
+                setTagSlug,
+                nameTag
+
+
             }}
         >
             {children}

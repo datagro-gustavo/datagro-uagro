@@ -18,6 +18,7 @@ import { TagsProvider } from "@/context/tags";
 import localFont from "next/font/local";
 import { Lora } from 'next/font/google';
 import { MattersProvider } from "@/context/matters";
+import { BannersProvider } from "@/context/banners";
 
 const lora = Lora({
   subsets: ['latin'],
@@ -80,6 +81,7 @@ export default function RootLayout({ children }) {
         className={`${lora.variable}  `}
       >
         <ConfigProvider>
+          <BannersProvider>
           <MattersProvider>
             <TagsProvider>
               <NewsProvider>
@@ -111,6 +113,7 @@ export default function RootLayout({ children }) {
               </NewsProvider>
             </TagsProvider>
           </MattersProvider>
+          </BannersProvider>
         </ConfigProvider>
 
         <Script

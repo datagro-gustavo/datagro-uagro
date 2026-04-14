@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 // e renderiza os cards conforme a lista qtd_cards.
 
 import React, { use, useContext, useEffect } from "react";
+import { BannersContext } from "@/context/banners";
 import styled from "styled-components";
 import { getSessionConfig } from "@/utils/getSessionConfig";
 import { NewsContext } from "@/context/news";
@@ -26,6 +27,16 @@ const HeroSection = ({ scrolled, layout, fixed, px = '', marketId }) => {
 
     const config = getSessionConfig(layout);
     const { notices } = useContext(NewsContext)
+
+
+    const { get, getBannerPositionInfo } = useContext(BannersContext);
+
+    useEffect(() => {
+        get(1);
+    }, [get]);
+
+    const bannerPosition = getBannerPositionInfo(1);
+
     if (!config) return null;
 
     // crosscheck entre TODOS os cards da config e TODAS as notices
@@ -117,7 +128,18 @@ const HeroSection = ({ scrolled, layout, fixed, px = '', marketId }) => {
     return (
         <section className={` xl:max-w-[1280px] 2xl:max-w-[1650px] mx-auto  mt-3  md:${px} mb-6`}>
 
-            <header className="mb-0">
+            <header className="mb-6">
+
+                {bannerPosition?.banners?.map((item) => (
+                    <img
+                        key={item.id}
+                        src={item.imageUrl}
+                        alt={item.name}
+                        style={{ width: "100%", maxWidth: "1600px" }}
+                    />
+                ))}
+
+
             </header>
 
             {/* Container com o layout definido na config.flex */}
