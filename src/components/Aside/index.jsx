@@ -278,7 +278,7 @@ export const Aside = () => {
 
 
                 <div className="mx-auto">
-                    <div className="mt-6 mb-6 w-full  ">
+                    <div className=" mb-6 w-full  ">
                         <h1 className="text-[#319e96] font-semibold text-lg "> Newsletter</h1>
                         <span className="text-sm font-semibold">Receba diariamente as principais notícias do agronegócio</span>
                     </div>

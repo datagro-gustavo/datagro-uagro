@@ -14,7 +14,7 @@ export const Climate = () => {
         <div className=''>
             <iframe
                 src={`https://publicador.uagro.com.br/clima_g/pt_br/cli.php`}
-                className='w-[320px] h-[560px] '
+                className='w-[320px] h-[480px] '
                 scrolling="no"
             />
         </div>
