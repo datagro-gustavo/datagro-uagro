@@ -9,6 +9,8 @@ import CardMiniChart from "./utils/miniChart";
 import { ColumnContext } from "../../context/column";
 import Image from "next/image";
 import { SafeImage } from "../SafeImage";
+import { usePathname } from "next/navigation";
+
 
 // Utilitário interno: traduz prioridade em classes visuais
 const priorityClasses = {
@@ -142,10 +144,15 @@ const CardNews = ({
 	chart,
 	lock,
 }) => {
+	const pathname = usePathname();
+
 	const { linkColor, setMarketId } = useContext(NewsContext)
 	const { setColumnistName } = useContext(ColumnContext)
 
+	const pathName = window.location.pathname
+
 	const router = useRouter()
+    const url = `${window.location.origin}${window.location.pathname}`;
 
 	const mediaType = video ? "v" : chart ? "c" : null;
 
@@ -577,14 +584,15 @@ const CardNews = ({
 				{/* Manchete */}
 				{title && priority === 'high' ? (
 					<h1 className={`text-2xl ${styles?.titleFontWeight} ${styles?.titleFontSize} leading-snug text-neutral-900`}>
-						<span
+						<a
+							href={`${url}${slugify(category[0]?.title)}/${slug} `}
 							className="hover:underline decoration-2 underline-offset-2 cursor-pointer"
 							onClick={() => onClick(slug)}
 						>
 							{!category ? <div className="mt-4"></div> : <></>}
 
 							{title}
-						</span>
+						</a>
 					</h1>
 				) : (
 					<h3 className={`text-[17px] ${styles?.titleFontWeight} ${styles?.titleFontSize} leading-snug text-neutral-900`}>
@@ -602,11 +610,14 @@ const CardNews = ({
 							</div> : <></>}
 						</span>
 
-						<span onClick={() => onClick(slug)} className="cursor-pointer hover:underline">
+						<a 
+							href={`${url}${slugify(category[0]?.title)}/${slug} `}
+
+						onClick={() => onClick(slug)} className="cursor-pointer hover:underline">
 							{!title ? <div style={{ height: "1.1rem" }}> <Skeleton width={"80%"} height={"15px"} /></div> : <></>}
 
 							{!title ? <Skeleton width={"70%"} height={"15px"} /> : title}
-						</span>
+						</a>
 					</h3>
 				)}
 

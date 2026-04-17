@@ -24,12 +24,13 @@ export const QuadrosProvider = ({ children }) => {
 
 	const [selectIds] = useState(() => {
 		const aleatorios = quadrosH.ids.sort(() => Math.random() - 0.5);
-		const escolhidos = aleatorios.slice(0, 2);
+		const escolhidos = aleatorios.slice(0, 9);
 		return [quadrosH?.idb, ...escolhidos]
 	})
 	const [selectIdsIntegra] = useState(() => {
 		const aleatorios = quadrosH.ids.sort(() => Math.random() - 0.5);
-		const escolhidos = aleatorios.slice(0, 2);
+		const escolhidos = aleatorios.slice(0, 9);
+
 		return [quadrosIntegraConfig?.idb, ...escolhidos]
 	})
 	const getQuadrosHome = async () => {
@@ -51,6 +52,10 @@ export const QuadrosProvider = ({ children }) => {
 				})),
 			}));
 
+			console.log("===========")
+			console.log(quadrosHome)
+
+			
 			const selecionados = quadrosHome?.filter((quadro) => {
 				const ok = selectIds.includes(parseInt(quadro.id));
 				return ok;

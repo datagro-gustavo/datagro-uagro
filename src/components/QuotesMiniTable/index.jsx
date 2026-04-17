@@ -156,7 +156,7 @@ export const QuotesTableMini = () => {
 <div className="flex-row mb-5 w-full border-b-2  font-metropolis font-semibold text-sm flex items-center gap-2">
 				{/** MENU */}
 				<div className='text-xl flex items-center gap-2'>
-					{Object.values(listQuadrosIds).slice(0, 4).map((item, index) => (
+					{Object.values(listQuadrosIds).slice(0, 9).map((item, index) => (
 						<button
 							key={index}
 							onClick={() => {setSelectedIndexMenu(index); setQuadroId(item.quadro)}}
@@ -165,7 +165,6 @@ export const QuotesTableMini = () => {
 									  ${selectedIndexMenu === index ? 'border-b-4 text-[#94C11F] border-[#94C11F]' : ''}
 									`}
 						>
-							{item.nome}
 						</button>
 					))}
 
