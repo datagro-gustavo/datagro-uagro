@@ -152,7 +152,7 @@ const CardNews = ({
 	const pathName = window.location.pathname
 
 	const router = useRouter()
-    const url = `${window.location.origin}${window.location.pathname}`;
+	const url = `${window.location.origin}${window.location.pathname}`;
 
 	const mediaType = video ? "v" : chart ? "c" : null;
 
@@ -290,19 +290,19 @@ const CardNews = ({
 	};
 
 	const slugify = (text) => {
-  return text
-    ?.toString()
-    .toLowerCase()
-    .normalize("NFD") // remove acentos
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\s+/g, "-") // espaços -> hífen
-    .replace(/[^\w-]+/g, "") // remove caracteres especiais
-    .replace(/--+/g, "-") // evita múltiplos hífens
-    .trim();
-};
+		return text
+			?.toString()
+			.toLowerCase()
+			.normalize("NFD") // remove acentos
+			.replace(/[\u0300-\u036f]/g, "")
+			.replace(/\s+/g, "-") // espaços -> hífen
+			.replace(/[^\w-]+/g, "") // remove caracteres especiais
+			.replace(/--+/g, "-") // evita múltiplos hífens
+			.trim();
+	};
 
 	const onClick = (slug) => {
-	
+
 		router.push(`/${slugify(category[0]?.title)}/${slug}`)
 	}
 
@@ -550,12 +550,14 @@ const CardNews = ({
 			].join(" ")}
 		>
 			{/* Imagem no topo com aspecto consistente */}
-			<span
+			<a
 				onClick={() => onClick(slug)}
+				href={`${url}${slugify(category[0]?.title)}/${slug} `}
+
 				className="block cursor-pointer"
 			>
 				{renderMedia()}
-			</span>
+			</a>
 
 			{/* Corpo do card */}
 			<div className="" >
@@ -610,10 +612,10 @@ const CardNews = ({
 							</div> : <></>}
 						</span>
 
-						<a 
+						<a
 							href={`${url}${slugify(category[0]?.title)}/${slug} `}
 
-						onClick={() => onClick(slug)} className="cursor-pointer hover:underline">
+							onClick={() => onClick(slug)} className="cursor-pointer hover:underline">
 							{!title ? <div style={{ height: "1.1rem" }}> <Skeleton width={"80%"} height={"15px"} /></div> : <></>}
 
 							{!title ? <Skeleton width={"70%"} height={"15px"} /> : title}
