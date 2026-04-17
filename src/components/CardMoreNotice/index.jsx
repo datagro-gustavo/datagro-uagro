@@ -93,13 +93,15 @@ const CardMoreNotice = ({ title, description, image, noticeId, slug, matters, pu
             <div className="md:ml-4 px-2 w-full">
                 {matters?.map(item => {
                     return (
-                        <p
+                        <a
+
+                            href={`${slugify(item?.title)}`}
                             key={item?.id}
                             onClick={() => handleRedirectToEditoriaPage(item?.id, item?.title)}
-                            className="hover:underline font-metropolis text-[#98BF0E] text-[0.7rem] mt-1 mb-2 font-bold uppercase"
+                            className="hover:underline block font-metropolis text-[#98BF0E] text-[0.7rem] mt-1 mb-2 font-bold uppercase"
                         >
                             {item?.title}
-                        </p>
+                        </a>
                     )
                 })}
                 <a

@@ -8,8 +8,8 @@ import Image from "next/image";
 
 export const RenderTables = ({ dados = [], compact = false, miniHome = false }) => {
 	//const navigate = useNavigate();
-	const { setSelectedQuoteCode, lastQuote  } = useContext(PricesContext)
-	
+	const { setSelectedQuoteCode, lastQuote } = useContext(PricesContext)
+
 	const fmtPct = (n) => `${n >= 0 ? "+" : ""}${Number(n).toFixed(2)}%`;
 	const fmtBRL = (n) =>
 		Number(n).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -25,9 +25,9 @@ export const RenderTables = ({ dados = [], compact = false, miniHome = false }) 
 		if (miniHome) {
 			setSelectedQuoteCode(cod);
 		} else {
-	//		navigate(`/quote/${cod}`);
+			//		navigate(`/quote/${cod}`);
 		}
-		
+
 	};
 
 	return (
@@ -60,19 +60,19 @@ export const RenderTables = ({ dados = [], compact = false, miniHome = false }) 
 					</div>
 				))}
 
-			<div className="flex justify-end py-3 items-center gap-2">
-				<span className="text-sm leading-none relative top-[1px]">Por</span>
-				<Image
-					src={datagro}
-					alt="DATAGRO"
-					width={160}
-					height={44}
-					className="w-30 cursor-pointer"
-					priority
-					onClick={() => window.open("https://portal.datagro.com", "_blank")}
-				/>
+				<div className="flex justify-end py-3 items-center gap-2">
+					<span className="text-sm leading-none relative top-[1px]">Por</span>
+					<Image
+						src={datagro}
+						alt="DATAGRO"
+						width={160}
+						height={44}
+						className="w-30 cursor-pointer"
+						priority
+						onClick={() => window.open("https://portal.datagro.com", "_blank")}
+					/>
 				</div>
-				</div>
+			</div>
 		</div>
 	);
 };

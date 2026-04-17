@@ -565,12 +565,14 @@ const CardNews = ({
 					<div className="flex flex-wrap items-center gap-1 mt-3 mb-2">
 						{category.map((cat, index) => (
 							<React.Fragment key={cat.id}>
-								<span
+								<a
+									href={`${url}${slugify(cat?.title)} `}
+
 									onClick={() => onClickGoToCategory(cat.title, cat.id)}
 									className="cursor-pointer text-[#98bf0e] text-xs h-[0.8rem] font-semibold uppercase hover:underline"
 								>
 									{cat.title}
-								</span>
+								</a>
 
 								{/* separador */}
 								{index < category.length - 1 && (

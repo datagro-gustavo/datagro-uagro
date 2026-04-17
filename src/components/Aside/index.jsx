@@ -325,7 +325,7 @@ export const Aside = () => {
                     )}
                 </BannerCarouselWrapper>
 
-                <RenderTables dados={Object.values(quadrosIntegra)[0]} />
+                <RenderTables dados={Object.values(quadrosIntegra)} />
                 {/* <Image alt="banner curso datagro" src={bannerSecondary} className="mt-10 w-full" width={500} height={300} /> */}
             </div>
 
