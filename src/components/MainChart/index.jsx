@@ -253,18 +253,3 @@ export const MainChart = () => {
 };
 
 export default MainChart;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -66,33 +66,24 @@ export const QuadrosProvider = ({ children }) => {
 
 	const getQuadrosIntegra = async () => {
 		const response = await fetch(
-			`https://precos.api.datagro.com/paginas/?mercado=0&minihome=&pos=1&idioma=${langCode}`
+			`https://precos.api.datagro.com/quadros?&quadro=247&idioma=${langCode}&nome=gustavo.faustino@datagro.com&senha=Xploit134`
 		);
+
 
 		if (response.status === 200) {
 			const precos = await response.json();
-
-			const quadrosIntegra = (precos.quadros || []).map((quadro) => ({
-				id: quadro.id,
-				titulo: quadro.titulo,
-				ativos: (quadro.ativos || []).map((ativo) => ({
-					nome: ativo?.dados?.nome,
+			
+			 const quadrosIntegra = {
+				id: precos.id,
+				titulo: precos.titulo,
+				ativos: (precos.ativos ?? []).map((ativo) => ({
+					nome: ativo?.dados?.nome ?? "",
 					preco: ativo?.dados?.ult ?? 0.0,
 					var: ativo?.dados?.var ?? 0.0,
 					cod: ativo?.dados?.cod ?? ""
 				})),
-			}));
-
-			const selecionados = quadrosIntegra?.filter((quadro) => {
-				const ok = selectIdsIntegra.includes(parseInt(quadro.id));
-				return ok;
-			}).sort((a, b) => {
-				if (parseInt(a.id) === first) return -1;
-				if (parseInt(b.id) === first) return 1;
-				return 0;
-			});
-
-			setQuadrosIntegra(selecionados)
+				};
+			setQuadrosIntegra(quadrosIntegra)
 		}
 	}
 
