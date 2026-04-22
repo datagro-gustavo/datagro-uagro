@@ -66,7 +66,7 @@ export const QuadrosProvider = ({ children }) => {
 
 	const getQuadrosIntegra = async () => {
 		const response = await fetch(
-			`https://precos.api.datagro.com/quadros?&quadro=247&idioma=${langCode}&nome=gustavo.faustino@datagro.com&senha=Xploit134`
+			`https://precos.api.datagro.com/quadros?&quadro=247&idioma=${langCode}`
 		);
 
 
