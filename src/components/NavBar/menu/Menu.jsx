@@ -108,7 +108,8 @@ export const Menu = ({ props, scrolled }) => {
 							onMouseLeave={() => setId()}
 							className="group relative">
 
-							<span
+							<a
+							href={`/${slugify(item?.Name)}`}
 								onClick={() => handleRedirectToCulturePage(item)}
 								className="
 								font-metropolis cursor-pointer text-black hover:text-[#139d4a] 
@@ -116,7 +117,7 @@ export const Menu = ({ props, scrolled }) => {
 								text-xs md:text-xs lg:text-[13px] xl:text-[13px]"
 							>
 								{item.Name}
-							</span>
+							</a>
 
 							{/* <div
 								className="absolute overflow-y-auto max-h-[420px]   shadow-md  border-l border-r  border-b  border-[#b4b4b4ce]  top-full left-[-1px] invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-300 ease-in-out bg-[#ffffff] shadow-lg mt-0 w-[319px] z-50  h-[auto]">
