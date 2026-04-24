@@ -60,13 +60,26 @@ import { useRouter } from "next/navigation";
 
 export const Footer = () => {
 
+    const slugify = (text) => {
+  return text
+    ?.toString()
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/^-+|-+$/g, "");
+};
+
+
     const {matters} = useContext(MattersContext)
     const router = useRouter()
 
-    const handleNavigateToPage = (id, name) => {
-        router.push(
-            `/editoria/${id}/${name}`,
-        )
+    const handleNavigateToPage = (name) => {
+        router.push(`/${slugify(name)}`)
+
     }
     return (
         <footer className=" font-metropolis relative bg-[#7fb954] text-gray-300 py-10 w-full h-[auto] ">
@@ -94,7 +107,7 @@ export const Footer = () => {
                     <ul className="space-y-2">
                         {matters?.map((item, index) => {
                             return (
-                                <li key={index} onClick={() => handleNavigateToPage(item?.Id, item?.Name)}><a href="#" className="hover:text-white transition-colors text-[#FFFFFF]">{item.Name}</a></li>
+                                <li key={index} onClick={() => handleNavigateToPage(item?.Name)}><a href={slugify(item?.Name)} className="hover:text-white transition-colors text-[#FFFFFF]">{item.Name}</a></li>
                             )
                         })}
 
