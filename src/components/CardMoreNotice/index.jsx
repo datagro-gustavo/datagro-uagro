@@ -67,14 +67,14 @@ const CardMoreNotice = ({ title, description, image, noticeId, slug, matters, pu
             .replace(/--+/g, "-") // evita múltiplos hífens
             .trim();
     };
-    const handleRedirectToNewsPage = (slug) => {
+
+const handleRedirectToNewsPage = (slug) => {
+  const category = matters[0]?.title;
+
+  router.push(`/${slugify(category)}/${slug}`);
+};
 
 
-        const category = matters[0]?.title || markets[0]?.title
-
-
-        router.push(`/${slugify(category)}/${slug}`)
-    }
     const handleRedirectToEditoriaPage = (id, name) => {
         router.push(`/${slugify(name)}`)
     }
