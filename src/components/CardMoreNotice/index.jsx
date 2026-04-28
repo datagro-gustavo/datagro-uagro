@@ -72,6 +72,7 @@ const CardMoreNotice = ({ title, description, image, noticeId, slug, matters, pu
     return (
         <div className="relative hover:border-[#99bf0e69] mx-auto cursor-pointer md:mx-none px-3 rounded-[15px] w-full h-auto py-3 flex flex-col md:flex-row items-center md:mr-5 md:h-auto shadow-md shadow-[#dddddda9] mt-9 border border-[#dddd]">
 
+
             <a
                 className="w-full md:w-[320px]"
                 href={newsHref}
@@ -80,6 +81,8 @@ const CardMoreNotice = ({ title, description, image, noticeId, slug, matters, pu
                     handleRedirectToNewsPage();
                 }}
             >
+
+            <a className="w-full md:w-[320px]" href={`/${url}/${slug}`}>
                 <SafeImage
                     className="w-full md:w-[229px] h-[180px] md:h-[163px] object-cover rounded-md"
                     src={image}
