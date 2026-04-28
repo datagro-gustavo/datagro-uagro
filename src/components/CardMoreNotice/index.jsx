@@ -152,6 +152,6 @@ const CardMoreNotice = ({ title, description, image, noticeId, slug, matters, pu
             </div>
         </div>
     )
-}
+
 
 export default CardMoreNotice
