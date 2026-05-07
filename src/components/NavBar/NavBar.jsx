@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useRouter } from "next/navigation";
 
 import Image from 'next/image';
-
+import Link from "next/link";
 import Logo from '../../assets/logos/logo-uagro.png';
 
 import { SidebarContext } from '@/context/sidebar';
@@ -70,14 +70,16 @@ export const NavBar = ({ props, paywall, fixed }) => {
 							aria-label="Ir para home"
 							className="cursor-pointer"
 						>
-							<Image
-								src={Logo}
-								width={300}
-								height={300}
-								alt="Logo DATAGRO"
-								className={`transition-all duration-500 w-46.25 md:w-65 mt-6 `}
-								priority
-							/>
+							<a href="/">
+								<Image
+									src={Logo}
+									width={300}
+									height={300}
+									alt="Logo DATAGRO"
+									className="transition-all duration-500 w-46.25 md:w-65 mt-6"
+									priority
+								/>
+							</a>
 						</button>
 					</div>
 

@@ -144,6 +144,7 @@ export function BannersProvider({ children }) {
             }
 
             const response = await api.get(url);
+            console.log(response.data)
             const bannersData = Array.isArray(response?.data) ? response.data : [];
 
             setBanners((prev) => ({

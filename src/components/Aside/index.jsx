@@ -110,7 +110,8 @@ const BannerCarouselWrapper = styled.div`
   }
 `;
 const BannerCarouselImage = styled.img`
-  width: 100%;
+  width: auto;
+  margin: 0 auto;
   height: auto;
   display: block;
   border-radius: 6px;
@@ -316,6 +317,7 @@ export const Aside = () => {
                             {bannerPosition.banners.map((item) => (
                                 <SwiperSlide key={item.id}>
                                     <BannerCarouselImage
+                                        onClick={() => window.open(item?.link, "_blank")}
                                         src={item.imageUrl}
                                         alt={item.name || "Banner"}
                                     />

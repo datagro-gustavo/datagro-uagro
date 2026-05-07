@@ -125,6 +125,7 @@ const SectionNoticesMatters = ({ id, slug, page }) => {
                                 {bannerPosition.banners.map((item) => (
                                     <SwiperSlide key={item.id}>
                                         <BannerCarouselImage
+                                            onClick={() => window.open(item?.link,"_blank")}
                                             src={item.imageUrl}
                                             alt={item.name || "Banner"}
                                         />

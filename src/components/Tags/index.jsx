@@ -28,13 +28,13 @@ const Tags = ({ notice }) => {
 
     return (
 
-        <div className=" flex-col md:flex flex-row items-center mb-16">
+        <div className=" flex-col md:flex flex-row items-center mb-16 flex-wrap justify-left  gap-3">
             {notice?.tags?.length > 0 && <p className="mr-0 font-medium  md:mr-1.5">Assuntos:</p>}
 
             {
                 notice?.tags?.map(item => {
                     return (
-                        <div onClick={() => handleNavigateToCulturePage(item)} className="mt-3 md:mt-0 cursor-pointer ml-2 flex items-center justify-center rounded-md text-[0.8rem]  px-3 w-[auto] h-[30px] text-white bg-[#7fb954]">
+                        <div onClick={() => handleNavigateToCulturePage(item)} className="mt-3 md:mt-0 cursor-pointer  flex items-center justify-center rounded-md text-[0.8rem]  px-3 w-[auto] h-[30px] text-white bg-[#7fb954]">
                             {item?.name}
                         </div>
                     )

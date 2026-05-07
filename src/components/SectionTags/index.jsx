@@ -68,6 +68,7 @@ const SectionNoticesTags = ({ slug, page }) => {
                             key={item.id}
                             src={item.imageUrl}
                             alt={item.name}
+                            onClick={() => window.open(item?.link,"_blank")}
                             style={{ width: "100%", maxWidth: "1600px" }}
                         />
                     ))}

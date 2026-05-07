@@ -89,7 +89,7 @@ export const AccordionEl = () => {
     };
 
   const onClickGoToCategory = (item) => {
-    router.push(`${slugify(item?.Name.toLowerCase())}`)
+    router.push(`/${slugify(item?.Name.toLowerCase())}`)
   };
 
   const toggleAccordion = (index) => {

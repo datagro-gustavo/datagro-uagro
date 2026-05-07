@@ -100,6 +100,7 @@ const Notices = ({ page }) => {
             {banner && (
               <BannerWrapper>
                 <BannerImage
+                  onClick={() => window.open(banner?.link,"_blank")}
                   src={banner.imageUrl}
                   alt={banner.name || "Banner"}
                 />

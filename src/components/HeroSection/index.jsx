@@ -130,14 +130,19 @@ const HeroSection = ({ scrolled, layout, fixed, px = '', marketId }) => {
 
             <header className="mb-6">
 
+                <div className="flex justify-center mb-13 mt-5">
+
                 {bannerPosition?.banners?.map((item) => (
                     <img
+                        onClick={() => window.open(item?.link,"_blank")}
                         key={item.id}
                         src={item.imageUrl}
                         alt={item.name}
-                        style={{ width: "100%", maxWidth: "1600px" }}
+                        className="cursor-pointer"
                     />
                 ))}
+
+                </div>
 
 
             </header>

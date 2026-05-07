@@ -127,9 +127,9 @@ const CardMoreNotice = ({ title, description, image, noticeId, slug, matters, pu
                     {limitarTexto(description, "220")}
                 </a>
 
-                <div className="h-[1px] bg-[#B5B4B4] mt-2" />
+                <div className="h-[1px] bg-[#B5B4B4] mt-2 mb-3" />
 
-                <div className="flex items-center gap-3 mt-3 flex-wrap">
+                <div className="flex items-center gap-3 mt-0 flex-wrap">
                     <p className="font-metropolis text-[#a0a0a0] font-medium text-[0.9rem]">
                         {formatDate(publishDate)}
                     </p>
