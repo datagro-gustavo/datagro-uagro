@@ -50,7 +50,7 @@ export const metadata = {
     title: "Uagro | Notícias de Agricultura e Agronegócio",
     description:
       "Acompanhe as principais notícias de agricultura, agronegócio, clima e mercado rural no UAgro.",
-    url: "https://www.uagro.com.br", // ajuste se necessário
+    url: "https://www.uagro.com.br",
     siteName: "UAgro",
     locale: "pt_BR",
     type: "website",
@@ -77,9 +77,33 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
+      <head>
+        {/* Google Tag Manager */}
+        <Script id="google-tag-manager" strategy="afterInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-P5PXWQRV');
+          `}
+        </Script>
+        {/* End Google Tag Manager */}
+      </head>
       <body
         className={`${lora.variable}  `}
       >
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-P5PXWQRV"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
+
         <ConfigProvider>
           <BannersProvider>
           <MattersProvider>
@@ -132,5 +156,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
-
