@@ -23,7 +23,7 @@ const TechSectionTemp = ({ mx, px, name, home = 0 }) => {
   const isHome = location.pathname === "/"
   const isNews = location.pathname.startsWith("/news");
 
-  const { get, getBannerPositionInfo } = useContext(BannersContext);
+  const { get, getBannerPositionInfo, registerClick } = useContext(BannersContext);
 
   useEffect(() => {
     get(2);
@@ -92,6 +92,10 @@ const TechSectionTemp = ({ mx, px, name, home = 0 }) => {
 
       {bannerPosition?.banners?.map((item) => (
         <img
+          onClick={() => {
+            registerClick(item.id, item.link);
+            window.open(item?.link, "_blank");
+          }}
           key={item.id}
           src={item.imageUrl}
           alt={item.name}

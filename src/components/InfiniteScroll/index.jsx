@@ -46,7 +46,7 @@ const Notices = ({ page }) => {
     setPageType
   } = useContext(NewsContext);
 
-  const { get, getBannerPositionInfo } = useContext(BannersContext);
+  const { get, getBannerPositionInfo, registerClick } = useContext(BannersContext);
 
   const CHUNK_SIZE = 8;
   const chunks = [];
@@ -100,7 +100,10 @@ const Notices = ({ page }) => {
             {banner && (
               <BannerWrapper>
                 <BannerImage
-                  onClick={() => window.open(banner?.link,"_blank")}
+                  onClick={() => {
+                    registerClick(banner.id, banner.link);
+                    window.open(banner?.link, "_blank");
+                  }}
                   src={banner.imageUrl}
                   alt={banner.name || "Banner"}
                 />

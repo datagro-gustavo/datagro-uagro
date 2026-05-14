@@ -122,7 +122,7 @@ const BannerCarouselImage = styled.img`
 export const Aside = () => {
 
 
-    const { get, getBannerPositionInfo } = useContext(BannersContext);
+    const { get, getBannerPositionInfo, registerClick } = useContext(BannersContext);
 
     useEffect(() => {
         get(3);
@@ -317,7 +317,10 @@ export const Aside = () => {
                             {bannerPosition.banners.map((item) => (
                                 <SwiperSlide key={item.id}>
                                     <BannerCarouselImage
-                                        onClick={() => window.open(item?.link, "_blank")}
+                                        onClick={() => {
+                                            registerClick(item.id, item.link);
+                                            window.open(item?.link, "_blank");
+                                        }}
                                         src={item.imageUrl}
                                         alt={item.name || "Banner"}
                                     />

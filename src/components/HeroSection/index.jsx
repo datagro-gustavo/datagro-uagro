@@ -29,7 +29,7 @@ const HeroSection = ({ scrolled, layout, fixed, px = '', marketId }) => {
     const { notices } = useContext(NewsContext)
 
 
-    const { get, getBannerPositionInfo } = useContext(BannersContext);
+    const { get, getBannerPositionInfo, registerClick } = useContext(BannersContext);
 
     useEffect(() => {
         get(1);
@@ -132,15 +132,18 @@ const HeroSection = ({ scrolled, layout, fixed, px = '', marketId }) => {
 
                 <div className="flex justify-center mb-13 mt-5">
 
-                {bannerPosition?.banners?.map((item) => (
-                    <img
-                        onClick={() => window.open(item?.link,"_blank")}
-                        key={item.id}
-                        src={item.imageUrl}
-                        alt={item.name}
-                        className="cursor-pointer"
-                    />
-                ))}
+                    {bannerPosition?.banners?.map((item) => (
+                        <img
+                            onClick={() => {
+                                registerClick(item.id, item.link);
+                                window.open(item?.link, "_blank");
+                            }}
+                            key={item.id}
+                            src={item.imageUrl}
+                            alt={item.name}
+                            className="cursor-pointer"
+                        />
+                    ))}
 
                 </div>
 

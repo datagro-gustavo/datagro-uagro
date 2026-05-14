@@ -172,6 +172,40 @@ export function BannersProvider({ children }) {
         };
     };
 
+    const registerClick = useCallback(async (bannerId, link) => {
+        try {
+
+
+            const formData = new URLSearchParams();
+            formData.append('banner_id', bannerId);
+            formData.append('link', link);
+            formData.append('site_lang', lang);
+            formData.append('user_agent', navigator.userAgent);
+            formData.append('browser_lang', navigator.language);
+            formData.append('domain', window.location.href);
+
+            const url = 'https://bclicks.datagro.com/clicks/v1/';
+
+            if (navigator.sendBeacon) {
+                const blob = new Blob([formData.toString()], {
+                    type: 'application/x-www-form-urlencoded',
+                });
+                navigator.sendBeacon(url, blob);
+            } else {
+                await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData.toString(),
+                    keepalive: true,
+                });
+            }
+        } catch (error) {
+            console.error('Erro ao registrar clique:', error);
+        }
+    }, [lang]);
+
+
+
     return (
         <BannersContext.Provider
             value={{
@@ -181,6 +215,7 @@ export function BannersProvider({ children }) {
                 banners,
                 get,
                 getBannerPositionInfo,
+                registerClick
             }}
         >
             {children}
