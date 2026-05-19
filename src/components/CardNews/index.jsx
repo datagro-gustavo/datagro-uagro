@@ -303,7 +303,7 @@ const CardNews = ({
 
 	const onClick = (slug) => {
 
-		router.push(`/${slugify(category[0]?.title)}/${slug}`)
+		router.push(`/${slugify(category?.[0]?.title)}/${slug}`)
 	}
 
 	const onClickGoToCategory = (category, categoryId) => {
@@ -552,7 +552,7 @@ const CardNews = ({
 			{/* Imagem no topo com aspecto consistente */}
 			<a
 				onClick={() => onClick(slug)}
-				href={`${url}${slugify(category[0]?.title)}/${slug} `}
+				href={`${url}${slugify(category?.[0]?.title)}/${slug} `}
 
 				className="block cursor-pointer"
 			>
@@ -615,7 +615,7 @@ const CardNews = ({
 						</span>
 
 						<a
-							href={`${url}${slugify(category[0]?.title)}/${slug} `}
+							href={`${url}${slugify(category?.[0]?.title)}/${slug} `}
 
 							onClick={() => onClick(slug)} className="cursor-pointer hover:underline">
 							{!title ? <div style={{ height: "1.1rem" }}> <Skeleton width={"80%"} height={"15px"} /></div> : <></>}
